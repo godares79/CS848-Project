@@ -1,0 +1,20 @@
+On YCSB:
+
+Need to install maven2.
+cd to directory of YCSB-master.
+run 'mvn clean package'.
+May get an error about asm-3.1.jar being invalid, and causing build to fail.
+Download asm-3.1.jar off the internet and replace in ~/.m2/....
+Should be about to complete build process at that point.
+Need to create a properties file for cassandra that lists the hosts and threadcount.
+To run the load use: bin/ycsb load cassandra-10 -P workloads/workloada -P properties
+To run the actual reads/writes: bin/ycsb run cassandra-10 -P workloads/workloada -P properties
+
+On Cassandra:
+
+Using latest version of cassandra for now at least...
+Latest version of cassandra requires at least java 1.7.
+OpenJDK should be alright, as long as not attempting to rebuild from source.
+bin/cassandra -f and bin/cassandra-cli -host localhost for running cassandra.
+Ran the simple tutorial in the README.txt file in Cassandra.
+
