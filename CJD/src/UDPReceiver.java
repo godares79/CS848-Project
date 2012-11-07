@@ -4,7 +4,7 @@ import java.net.DatagramSocket;
 public class UDPReceiver {
   public static void main(String args[]) {
     try {
-      int port = 90;
+      int port = 9050;
 
       // Create a socket to listen on the port.
       DatagramSocket dsocket = new DatagramSocket(port);
