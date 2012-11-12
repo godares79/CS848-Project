@@ -1,0 +1,8 @@
+This will serve as a place to record some notes and ideas for the course
+paper as they are thought of…
+
+- Single evaluation section, separate subsections for simulation and 
+  physical server evaluation
+- Evaluation 
+- Really need to justify why we check what resource information we do
+  in order to gather the server load
