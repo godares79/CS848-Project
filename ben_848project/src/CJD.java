@@ -6,7 +6,7 @@ import java.util.Vector;
 public class CJD implements Runnable {
 	Vector<JobNode> m_jobs = new Vector<JobNode>();
 	Vector<Server> m_servers = new Vector<Server>();
-	final int m_numOfServers = 2; // number of servers in our simulation.
+	final int m_numOfServers = 5; // number of servers in our simulation.
 	final int m_maxJobInQueue = 5; // max job that can assign to server
 
 	// private boolean m_isRunning = false;

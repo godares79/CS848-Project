@@ -1,3 +1,10 @@
+On Java:
+
+Want to install Oracle Java 1.7.0_09.
+Follow info on www.wikihow.com/Install-Oracle-Java-on-Ubuntu-Linux.
+Don't bother with JRE, JDK has everything.
+Seems to all work without issue.
+
 On YCSB:
 
 Need to install maven2.
@@ -14,7 +21,16 @@ On Cassandra:
 
 Using latest version of cassandra for now at least...
 Latest version of cassandra requires at least java 1.7.
-OpenJDK should be alright, as long as not attempting to rebuild from source.
+OpenJDK should be alright, as long as not attempting to rebuild from source. Oracle JDK can recompile from source (installed oracle jdk on the cluster machines).
+Make sure to create the /var/log/cassandra and /var/lib/cassandra directories and change their ownership.
 bin/cassandra -f and bin/cassandra-cli -host localhost for running cassandra.
 Ran the simple tutorial in the README.txt file in Cassandra.
 
+Setting up Cassandra on multiple nodes:
+
+The first node setup is more complex than the rest of the nodes.
+Need to change the conf/cassandra.yaml file.
+ - May need to change the partitioner entry, but it is random for now.
+ - Change the listen_address and rpc_address to the node address. Also change the seed to the node address.
+ - The request_scheduler entry in this file sounds exactly like what we are interested in implementing. We should look at this further, but it looks like org.apache.cassandra.scheduler.{NoScheduler,RoundRobinScheduler} is exactly where we should be implementing our scheduling algorithms.
+ - Used the tutorial at wiki.apache.org/cassandra/MultinodeCluster
