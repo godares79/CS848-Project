@@ -1,12 +1,7 @@
 #! /bin/bash
 # Start up cassandra on all of the nodes
 
-echo "STARTING CASSANDRA..."
-
-echo -ne "  UGSTER02..."
-`/opt/apache-cassandra-1.1.6/bin/cassandra`
-sleep 5
-echo "DONE"
+echo "STARTING CASSANDRA NODES (Except ugster02)..."
 
 echo -ne "  UGSTER01..."
 `ssh ugster01 '/opt/apache-cassandra-1.1.6/bin/cassandra'`
