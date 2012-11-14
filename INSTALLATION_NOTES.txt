@@ -34,3 +34,5 @@ Need to change the conf/cassandra.yaml file.
  - Change the listen_address and rpc_address to the node address. Also change the seed to the node address.
  - The request_scheduler entry in this file sounds exactly like what we are interested in implementing. We should look at this further, but it looks like org.apache.cassandra.scheduler.{NoScheduler,RoundRobinScheduler} is exactly where we should be implementing our scheduling algorithms.
  - Used the tutorial at wiki.apache.org/cassandra/MultinodeCluster
+
+Cassandra is set up on all nodes. Seems to all be working.
