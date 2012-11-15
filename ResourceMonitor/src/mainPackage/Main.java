@@ -15,12 +15,14 @@ public class Main {
 		while (true) {
 			System.out.println("Collecting resource information");
 			
-			int resourceValue = collectResources();
+			//int resourceValue = collectResources();
+			//just put some random things here for now 
+			String resourceValue = "01234567890123456789012345678901234567890";
 			sendResourceUsage(resourceValue);
 			
-			//Sleep for 3 seconds then do again
+			//Sleep for 10 seconds then do again
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -34,10 +36,10 @@ public class Main {
 	}
 	
 	//Send a packet to the cjd with the usage information
-	private static void sendResourceUsage(Integer resourceUsage) {
+	private static void sendResourceUsage(String resourceUsage) {
 		//Will need to change the host to be the central server
 		try {
-			String host = "192.168.0.1";
+			String host = " 127.0.0.1";
 			int port = 9050;
 			
 			byte[] message = new byte[] { resourceUsage.byteValue() };
