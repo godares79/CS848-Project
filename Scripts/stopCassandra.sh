@@ -6,6 +6,7 @@
 # (at least, it doesn't shut it down for you)
 
 echo "STOPPING CASSANDRA NODES (EXCEPT ugster02)"
+echo "SEE THE stop-cassandra SCRIPT IN THE CASSANDRA BIN FOR A BETTER APPROACH"
 
 `ssh ugster01 'kill $(pidof java)'`
 `ssh ugster03 'kill $(pidof java)'`

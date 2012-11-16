@@ -1,0 +1,16 @@
+Cassandra:
+ Figure out the consistency level that we should use (should we use do quorum reads and writes?)
+ Figure out the partitioning scheme (Random is probably best)
+ Assign tokens to nodes (see the cassandra wiki getting started, set initial_token in cassandra.yaml)
+ Get Cassandra source code, make sure it can compile and work
+ Look into the scheduling algorithms code
+ 
+YCSB:
+ See https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties, figure out exact settings
+ Load up a database on the cluster with data, try something like 10,000,000 records to start with
+ Section 6 of https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload is useful when it comes to threads and deadlines
+ 
+Experiments:
+ Get a baseline using NoScheduler and RoundRobinScheduler
+ Make extensive notes on setting used for experiments
+ 
