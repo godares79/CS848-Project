@@ -3,6 +3,10 @@ Cassandra:
  Assign tokens to nodes (see the cassandra wiki getting started, set initial_token in cassandra.yaml)
   Keep using RandomPartitioner, it is just hash partitioning
  Get Cassandra source code, make sure it can compile and work
+  Cassandra is compiling in Windows - instructions: http://wiki.apache.org/cassandra/RunningCassandraInEclipse
+  Use latest version of Eclipse
+  Fairly straightforward, no problems getting it running
+ Install and compile the Cassandra command line client
  Look into the scheduling algorithms code
  
 YCSB:
