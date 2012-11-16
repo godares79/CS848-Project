@@ -1,7 +1,7 @@
 Cassandra:
  Figure out the consistency level that we should use (should we use do quorum reads and writes?)
- Figure out the partitioning scheme (Random is probably best)
  Assign tokens to nodes (see the cassandra wiki getting started, set initial_token in cassandra.yaml)
+  Keep using RandomPartitioner, it is just hash partitioning
  Get Cassandra source code, make sure it can compile and work
  Look into the scheduling algorithms code
  
@@ -14,3 +14,10 @@ Experiments:
  Get a baseline using NoScheduler and RoundRobinScheduler
  Make extensive notes on setting used for experiments
  
+Bunch of Links:
+https://github.com/brianfrankcooper/YCSB/wiki/Implementing-New-Workloads
+https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload
+https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties
+
+http://wiki.apache.org/cassandra/RunningCassandraInEclipse
+http://wiki.apache.org/cassandra/GettingStarted
