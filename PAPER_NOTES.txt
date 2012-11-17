@@ -6,3 +6,7 @@ paper as they are thought of…
 - Really need to justify why we check what resource information we do
   in order to gather the server load
 - Zipfian distribution for data load curve
+
+- Compare our scheduler, to the current cassandra method of sending
+a read request to all replicas and then using the first returned one
+   Our will hopefully be better

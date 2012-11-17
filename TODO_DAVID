@@ -1,13 +1,22 @@
 Cassandra:
  Figure out the consistency level that we should use (should we use do quorum reads and writes?)
+  Do not do quorum reads, just do single reads
  Assign tokens to nodes (see the cassandra wiki getting started, set initial_token in cassandra.yaml)
   Keep using RandomPartitioner, it is just hash partitioning
  Get Cassandra source code, make sure it can compile and work
   Cassandra is compiling in Windows - instructions: http://wiki.apache.org/cassandra/RunningCassandraInEclipse
   Use latest version of Eclipse
   Fairly straightforward, no problems getting it running
- Install and compile the Cassandra command line client
  Look into the scheduling algorithms code
+  Looks like the scheduling algorithms in cassandra.scheduler only handle incoming client requests, and gives them priority
+  Need to find the location where reads and writes are sent to replicas so that we can change that
+  In Cassandra, even if you read consistency level is just one, it will still send read requests to all of the replicas… we could greatly improve upon this!
+  Requests to the client are handled by the cassandra.scheduler classes.
+  The requests are routed using the classes in cassandra.locator? The strategies are used to route requests, and the snitches provide some kind of rack awareness.
+   It seems that the strategies are more interested in routing write requests… I wonder if they are also responsible for reads?
+  thrift.CassandraServer.get maybe handles reads? Check out StorageHandler.getPartitionService()
+   YCSB uses the thrift api
+   YCSB uses a read and write consistency level of ONE (I think that it acceptable for us, maybe run tests with quorum too)
  
 YCSB:
  See https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties, figure out exact settings
@@ -15,8 +24,8 @@ YCSB:
  Section 6 of https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload is useful when it comes to threads and deadlines
  
 Experiments:
- Get a baseline using NoScheduler and RoundRobinScheduler
- Make extensive notes on setting used for experiments
+ Get a baseline using the pre-existing scheduling algorithms
+ Make extensive notes on settings that we use for experiments
  
 Bunch of Links:
 https://github.com/brianfrankcooper/YCSB/wiki/Implementing-New-Workloads

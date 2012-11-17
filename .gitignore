@@ -2,3 +2,8 @@ YCSB-master/
 apache-cassandra-1.1.6/
 apache-cassandra-1.1.6-src/bin/
 apache-cassandra-1.1.6-src/doc/
+apache-cassandra-1.1.6-src/build/
+apache-cassandra-1.1.6-src/.classpath
+apache-cassandra-1.1.6-src/build.xml
+apache-cassandra-1.1.6-src/build.properties.default
+apache-cassandra-1.1.6-src/src/gen-java/
