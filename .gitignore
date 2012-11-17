@@ -7,3 +7,4 @@ apache-cassandra-1.1.6-src/.classpath
 apache-cassandra-1.1.6-src/build.xml
 apache-cassandra-1.1.6-src/build.properties.default
 apache-cassandra-1.1.6-src/src/gen-java/
+*.class
