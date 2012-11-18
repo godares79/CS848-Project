@@ -14,9 +14,12 @@ Cassandra:
   Requests to the client are handled by the cassandra.scheduler classes.
   The requests are routed using the classes in cassandra.locator? The strategies are used to route requests, and the snitches provide some kind of rack awareness.
    It seems that the strategies are more interested in routing write requests… I wonder if they are also responsible for reads?
-  thrift.CassandraServer.get maybe handles reads? Check out StorageHandler.getPartitionService()
+  thrift.CassandraServer.get maybe handles reads (yes, in the method get_slice) (look at Cassandra.java_get_slice())? Check out StorageHandler.getPartitionService()
    YCSB uses the thrift api
    YCSB uses a read and write consistency level of ONE (I think that it acceptable for us, maybe run tests with quorum too)
+   Change the logger.debugs in CassandraServer to logger.info's
+   QueryPath looks like it has something to do with the get
+   CassandraServer.getSlice() - line that is columnFamilies.get(..) looks a lot like what I want
  
 YCSB:
  See https://github.com/brianfrankcooper/YCSB/wiki/Core-Properties, figure out exact settings
