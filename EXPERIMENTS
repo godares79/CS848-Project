@@ -1,5 +1,13 @@
 The experiments that I have run on the cluster thus far:
 
+Default settings:
+ Cassandra Replication = 3
+ YCSB threads = 16
+ fieldcount=10
+ fieldlength=100
+ requestdistribution=zipfian
+These may be overriden below (will be stated).
+
 ********************************************************************************
 1. Inserting 1,000,000 records into the database
 
@@ -85,4 +93,59 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
  556 sec: 10000000 operations; 16471.93 current ops/sec; [UPDATE AverageLatency(us)=335.73] [READ AverageLatency(us)=889.33]
 
  *******************************************************************************
+ 3. Performing 10,000,000 operations on the 1,000,000 records. R/W consistency
+ of ONE. 50 Threads.
  
+d4dietri@ugster02:~/YCSB-master$ bin/ycsb run cassandra-10 -P workloads/workloadb -P cassandra/properties -s > run.log
+Loading workload...
+Starting test.
+ 0 sec: 0 operations;
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+ 10 sec: 233279 operations; 23276.69 current ops/sec; [UPDATE AverageLatency(us)=643.05] [READ AverageLatency(us)=2200.23]
+ 20 sec: 477786 operations; 24445.81 current ops/sec; [UPDATE AverageLatency(us)=492.56] [READ AverageLatency(us)=2118.47]
+ 30 sec: 721967 operations; 24415.66 current ops/sec; [UPDATE AverageLatency(us)=499.35] [READ AverageLatency(us)=2124.65]
+ 40 sec: 965275 operations; 24328.37 current ops/sec; [UPDATE AverageLatency(us)=501.7] [READ AverageLatency(us)=2131.03]
+ 50 sec: 1213210 operations; 24793.5 current ops/sec; [UPDATE AverageLatency(us)=507.79] [READ AverageLatency(us)=2088.97]
+ 60 sec: 1455210 operations; 24197.58 current ops/sec; [UPDATE AverageLatency(us)=486.25] [READ AverageLatency(us)=2138.11]
+ 70 sec: 1701043 operations; 24583.3 current ops/sec; [UPDATE AverageLatency(us)=519.83] [READ AverageLatency(us)=2111.35]
+ 80 sec: 1940326 operations; 23925.91 current ops/sec; [UPDATE AverageLatency(us)=521.55] [READ AverageLatency(us)=2166.77]
+ 90 sec: 2180927 operations; 24057.69 current ops/sec; [UPDATE AverageLatency(us)=489.47] [READ AverageLatency(us)=2156.65]
+ 100 sec: 2416343 operations; 23541.6 current ops/sec; [UPDATE AverageLatency(us)=483.13] [READ AverageLatency(us)=2201.67]
+ 110 sec: 2651417 operations; 23505.05 current ops/sec; [UPDATE AverageLatency(us)=453.81] [READ AverageLatency(us)=2209]
+ 120 sec: 2884749 operations; 23333.2 current ops/sec; [UPDATE AverageLatency(us)=466.2] [READ AverageLatency(us)=2223.76]
+ 130 sec: 3117208 operations; 23243.58 current ops/sec; [UPDATE AverageLatency(us)=477.9] [READ AverageLatency(us)=2232.16]
+ 140 sec: 3345767 operations; 22853.61 current ops/sec; [UPDATE AverageLatency(us)=480.63] [READ AverageLatency(us)=2269.8]
+ 150 sec: 3576678 operations; 23091.1 current ops/sec; [UPDATE AverageLatency(us)=460.72] [READ AverageLatency(us)=2248.16]
+ 160 sec: 3806942 operations; 23024.1 current ops/sec; [UPDATE AverageLatency(us)=483.89] [READ AverageLatency(us)=2252.01]
+ 170 sec: 4032401 operations; 22545.9 current ops/sec; [UPDATE AverageLatency(us)=500.11] [READ AverageLatency(us)=2297.65]
+ 180 sec: 4258326 operations; 22590.24 current ops/sec; [UPDATE AverageLatency(us)=489.9] [READ AverageLatency(us)=2303.09]
+ 190 sec: 4483660 operations; 22531.15 current ops/sec; [UPDATE AverageLatency(us)=494.75] [READ AverageLatency(us)=2303.08]
+ 200 sec: 4712974 operations; 22931.4 current ops/sec; [UPDATE AverageLatency(us)=471.59] [READ AverageLatency(us)=2263.78]
+ 210 sec: 4939532 operations; 22653.53 current ops/sec; [UPDATE AverageLatency(us)=491.2] [READ AverageLatency(us)=2291.11]
+ 220 sec: 5168051 operations; 22851.9 current ops/sec; [UPDATE AverageLatency(us)=464.37] [READ AverageLatency(us)=2271.32]
+ 230 sec: 5389850 operations; 22177.68 current ops/sec; [UPDATE AverageLatency(us)=491.19] [READ AverageLatency(us)=2339.74]
+ 240 sec: 5619439 operations; 22956.6 current ops/sec; [UPDATE AverageLatency(us)=484.02] [READ AverageLatency(us)=2259.48]
+ 250 sec: 5847511 operations; 22807.2 current ops/sec; [UPDATE AverageLatency(us)=495.91] [READ AverageLatency(us)=2276.57]
+ 260 sec: 6075449 operations; 22791.52 current ops/sec; [UPDATE AverageLatency(us)=494.9] [READ AverageLatency(us)=2276.24]
+ 270 sec: 6305708 operations; 23023.6 current ops/sec; [UPDATE AverageLatency(us)=457.92] [READ AverageLatency(us)=2255.22]
+ 280 sec: 6535928 operations; 23022 current ops/sec; [UPDATE AverageLatency(us)=503.85] [READ AverageLatency(us)=2252.62]
+ 290 sec: 6767010 operations; 23105.89 current ops/sec; [UPDATE AverageLatency(us)=498.36] [READ AverageLatency(us)=2245.47]
+ 300 sec: 6991915 operations; 22488.25 current ops/sec; [UPDATE AverageLatency(us)=443.98] [READ AverageLatency(us)=2309.31]
+ 310 sec: 7211465 operations; 21955 current ops/sec; [UPDATE AverageLatency(us)=487.86] [READ AverageLatency(us)=2358.94]
+ 320 sec: 7423628 operations; 21214.18 current ops/sec; [UPDATE AverageLatency(us)=494.87] [READ AverageLatency(us)=2454.97]
+ 330 sec: 7641964 operations; 21833.6 current ops/sec; [UPDATE AverageLatency(us)=469.58] [READ AverageLatency(us)=2378.78]
+ 340 sec: 7863696 operations; 22170.98 current ops/sec; [UPDATE AverageLatency(us)=489.23] [READ AverageLatency(us)=2339.94]
+ 350 sec: 8083060 operations; 21934.21 current ops/sec; [UPDATE AverageLatency(us)=474.55] [READ AverageLatency(us)=2366.35]
+ 360 sec: 8300317 operations; 21725.7 current ops/sec; [UPDATE AverageLatency(us)=489.01] [READ AverageLatency(us)=2392.39]
+ 370 sec: 8518157 operations; 21781.82 current ops/sec; [UPDATE AverageLatency(us)=477.14] [READ AverageLatency(us)=2384.22]
+ 380 sec: 8733760 operations; 21560.3 current ops/sec; [UPDATE AverageLatency(us)=534.15] [READ AverageLatency(us)=2406.55]
+ 390 sec: 8949841 operations; 21605.94 current ops/sec; [UPDATE AverageLatency(us)=475.9] [READ AverageLatency(us)=2399.21]
+ 400 sec: 9063966 operations; 11411.36 current ops/sec; [UPDATE AverageLatency(us)=468.1] [READ AverageLatency(us)=2409.94]
+ ***CASSANDRA CRASHED - CORE DUMP***
+ 410 sec: 9063966 operations; 0 current ops/sec;
+ 420 sec: 9063966 operations; 0 current ops/sec;
+ 430 sec: 9063966 operations; 0 current ops/sec;
+ 440 sec: 9063966 operations; 0 current ops/sec;
+ 450 sec: 9063966 operations; 0 current ops/sec;
