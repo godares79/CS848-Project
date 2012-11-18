@@ -8,4 +8,5 @@ for the RMI Server.
 Replace <your hostname> with the hostname of your computer.
 Replace the C:/Users/david/... with the path to the bin folder of your RMI Server project.
 
+Copy the server.policy to the bin/ directory as well.
 Make sure that you run rmiregistry.exe (or rmiregistry in mac/linux) in a separate terminal.
