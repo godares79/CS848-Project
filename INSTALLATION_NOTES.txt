@@ -47,7 +47,9 @@ Need to change the conf/cassandra.yaml file.
  - The request_scheduler entry in this file sounds exactly like what we are interested in implementing. We should look at this further, but it looks like org.apache.cassandra.scheduler.{NoScheduler,RoundRobinScheduler} is exactly where we should be implementing our scheduling algorithms.
  - Used the tutorial at wiki.apache.org/cassandra/MultinodeCluster
 
-Cassandra is set up on all nodes. Seems to all be working.
+Cassandra is set up on all nodes.
+Need to ensure time across all nodes is synchronized.
+ - ugster07 is way off right now... need to sync using ntpdate
 
 
 On compiling Cassandra:
