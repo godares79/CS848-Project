@@ -49,7 +49,9 @@ Need to change the conf/cassandra.yaml file.
 
 Cassandra is set up on all nodes.
 Need to ensure time across all nodes is synchronized.
- - ugster07 is way off right now... need to sync using ntpdate
+ - ugster07 is way off right now... need to sync with other servers
+ - If time is not synced, then schema agreements will not occur
+ - To set time manually use: date +%T -s "HH:MM:SS"
 
 
 On compiling Cassandra:
