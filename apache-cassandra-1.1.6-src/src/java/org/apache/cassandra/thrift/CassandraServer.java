@@ -108,6 +108,7 @@ public class CassandraServer implements Cassandra.Iface
             schedule(DatabaseDescriptor.getRpcTimeout());
             try
             {
+            	logger.info("Calling StorageProxy.read");
                 rows = StorageProxy.read(commands, consistency_level);
             }
             finally
