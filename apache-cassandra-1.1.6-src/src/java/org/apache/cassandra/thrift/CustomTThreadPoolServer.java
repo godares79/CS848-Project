@@ -82,6 +82,7 @@ public class CustomTThreadPoolServer extends TServer
         stopped_ = false;
         while (!stopped_)
         {
+        	// This loop continually monitors for new clients
             // block until we are under max clients
             while (activeClients.get() >= args.maxWorkerThreads)
             {
@@ -99,6 +100,7 @@ public class CustomTThreadPoolServer extends TServer
             {
                 TTransport client = serverTransport_.accept();
                 activeClients.incrementAndGet();
+                LOGGER.info("Number of active clients = " + activeClients.toString());
                 WorkerProcess wp = new WorkerProcess(client);
                 executorService_.execute(wp);
             }
@@ -174,6 +176,8 @@ public class CustomTThreadPoolServer extends TServer
             TProtocol outputProtocol = null;
             try
             {
+            	LOGGER.info("Setting up client information");
+            	
                 processor = processorFactory_.getProcessor(client_);
                 inputTransport = inputTransportFactory_.getTransport(client_);
                 outputTransport = outputTransportFactory_.getTransport(client_);
