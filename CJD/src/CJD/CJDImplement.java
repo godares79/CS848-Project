@@ -15,9 +15,9 @@ public class CJDImplement extends UnicastRemoteObject implements CJDInterface {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public double GetNodeScore(String IP) throws RemoteException {
 		// TODO Auto-generated method stub
-		return 0;
+		return NodeManager.GetScore(IP);
 	}
-
 }

@@ -3,6 +3,7 @@
 	<name>CJD</name>
 	<comment></comment>
 	<projects>
+		<project>CJDServer</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
