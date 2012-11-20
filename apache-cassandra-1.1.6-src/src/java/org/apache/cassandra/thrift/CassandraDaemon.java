@@ -20,6 +20,7 @@ package org.apache.cassandra.thrift;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.rmi.Naming;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -43,6 +44,8 @@ import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.apache.thrift.transport.TTransportFactory;
 
+import CJD.CJDInterface;
+
 /**
  * This class supports two methods for creating a Cassandra node daemon,
  * invoking the class's main method, and using the jsvc wrapper from
@@ -55,6 +58,7 @@ import org.apache.thrift.transport.TTransportFactory;
 public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassandraDaemon
 {
     protected static CassandraDaemon instance;
+    public static CJDInterface cjdClient;
 
     static
     {
@@ -158,6 +162,15 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
                 ExecutorService executorService = new CleaningThreadPool(cassandraServer.clientState, serverArgs.minWorkerThreads, serverArgs.maxWorkerThreads);
                 serverEngine = new CustomTThreadPoolServer(serverArgs, executorService);
                 logger.info(String.format("Using synchronous/threadpool thrift server on %s : %s", listenAddr, listenPort));
+                
+                //Want to set up the RMI client here
+                try {
+            		String url = new String("rmi://127.0.0.1:1099//CJD");
+            		cjdClient = (CJDInterface) Naming.lookup(url);
+            		logger.info("Connected to RMI Server.");
+        		} catch(Exception ex) {
+            		ex.printStackTrace();
+        		}
             }
             else
             {

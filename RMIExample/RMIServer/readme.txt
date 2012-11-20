@@ -1,7 +1,7 @@
 In eclipse, these need to be specified in the VM Arguments textbox, in the run configuration
 for the RMI Server.
 
--Djava.rmi.server.codebase=file:/C:/Users/david/Desktop/Masters/CS848/RMIExample/RMIServer/bin/
+-Djava.rmi.server.codebase=file:/Users/daviddietrich/Programming/CS848/RMIExample/RMIServer/bin/
 -Djava.rmi.server.hostname=<your hostname>
 -Djava.security.policy=server.policy
 
