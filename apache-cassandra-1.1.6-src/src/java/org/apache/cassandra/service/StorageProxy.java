@@ -30,6 +30,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
+import CJD.CJDInterface;
+
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -643,6 +645,8 @@ public class StorageProxy implements StorageProxyMBean
     private static List<Row> fetchRows(List<ReadCommand> initialCommands, ConsistencyLevel consistency_level) throws IOException, UnavailableException, TimeoutException
     {  
     	logger.info("Inside fetchRows... this is where the actual sending of read requests to the replicas takes place");
+    	//Need to use the CJD client to get the replica data from the CJD
+    	CJDInterface cjdClient = org.apache.cassandra.thrift.CassandraDaemon.cjdClient;
     	
         List<Row> rows = new ArrayList<Row>(initialCommands.size());
         List<ReadCommand> commandsToRetry = Collections.emptyList();
@@ -664,6 +668,10 @@ public class StorageProxy implements StorageProxyMBean
 
                 List<InetAddress> endpoints = StorageService.instance.getLiveNaturalEndpoints(command.table,
                                                                                               command.key);
+                /**
+                 * Replace the line below with the CJD call to get the usage information for the 3 nodes.
+                 * Sort them according to the usage information.
+                 */
                 DatabaseDescriptor.getEndpointSnitch().sortByProximity(FBUtilities.getBroadcastAddress(), endpoints);
 
                 RowDigestResolver resolver = new RowDigestResolver(command.table, command.key);

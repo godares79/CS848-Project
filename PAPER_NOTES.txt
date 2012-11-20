@@ -10,3 +10,4 @@ paper as they are thought of…
 - Compare our scheduler, to the current cassandra method of sending
 a read request to all replicas and then using the first returned one
    Our will hopefully be better
+- Use GNUPlot to create the graphs
