@@ -6,10 +6,7 @@ import java.net.DatagramSocket;
 public class UDPReceiver {
   public static void ReceiveUDP() {
     try {
-      int port = 9050;
-      
-      //create the node manager
-      NodeManager manager=new NodeManager();
+      int port = 9040;
 
       // Create a socket to listen on the port.
       DatagramSocket dsocket = new DatagramSocket(port);
@@ -37,7 +34,7 @@ public class UDPReceiver {
         String IP = msg.substring(0, 15);
         String scoreString = msg.substring(16, 23);
         double score = Double.parseDouble(scoreString);
-        manager.Update(IP, score);
+        NodeManager.Update(IP, score);
         
         //System.out.println(packet.getAddress().getHostName() + ": "
           //  + msg);
