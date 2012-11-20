@@ -11,3 +11,6 @@ paper as they are thought of…
 a read request to all replicas and then using the first returned one
    Our will hopefully be better
 - Use GNUPlot to create the graphs
+- The Read Digest in Cassandra is sent to all other nodes and each node returns
+  a hash value and timestamp of the data. If it is out of date, then the new
+  data is pushed to the node.
