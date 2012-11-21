@@ -1,0 +1,3 @@
+#run CJD Client on ugster01 :D
+
+java -Djava.rmi.server.codebase=file:/home/y435liu/CJDClient/bin/ -Djava.rmi.server.hostname=ugster01 -Djava.security.policy=server.policy CJDClient/Client
