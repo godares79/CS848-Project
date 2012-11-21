@@ -669,7 +669,7 @@ public class StorageProxy implements StorageProxyMBean
                 List<InetAddress> endpoints = StorageService.instance.getLiveNaturalEndpoints(command.table,
                                                                                               command.key);
                 /**
-                 * Replace the line below with the CJD call to get the usage information for the 3 nodes.
+                 * Can replace the line below with the CJD call to get the usage information for the 3 nodes.
                  * Sort them according to the usage information.
                  */
                 DatabaseDescriptor.getEndpointSnitch().sortByProximity(FBUtilities.getBroadcastAddress(), endpoints);
