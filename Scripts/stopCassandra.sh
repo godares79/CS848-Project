@@ -1,4 +1,4 @@
-#! /bin/bash -x
+#! /bin/bash
 # Will shutdown cassandra on all nodes
 # Assumes that the cassandra process pid handle is 'java' which isn't very nice,
 # but necessary
