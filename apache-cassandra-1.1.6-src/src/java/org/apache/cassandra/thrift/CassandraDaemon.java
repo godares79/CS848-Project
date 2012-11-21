@@ -168,6 +168,8 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
             		String url = new String("rmi://127.0.0.1:1099//CJD");
             		cjdClient = (CJDInterface) Naming.lookup(url);
             		logger.info("Connected to RMI Server.");
+            		
+            		logger.info("ugster04 score = " + cjdClient.GetNodeScore("129.97.173.71"));
         		} catch(Exception ex) {
             		ex.printStackTrace();
         		}
