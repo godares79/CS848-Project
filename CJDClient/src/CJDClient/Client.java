@@ -13,11 +13,15 @@ public class Client {
 		// TODO Auto-generated method stub
 		try{
 		
-		String url = new String("rmi://127.0.0.1:1099//CJD");
+		String url = new String("rmi://ugster02:1099//CJD");
 
 		CJDInterface client = (CJDInterface) Naming.lookup(url);
-		double reply = client.GetNodeScore("5555.1817729874");
-		System.out.println("\nSever reply:" + reply + "\n");
+		
+		while(true){
+			String input = "5555.1817729874";
+			double reply = client.GetNodeScore(input);
+			System.out.println("\nSever reply:" + reply + "\n");
+		}
 		}
 		catch(Exception ex){
 			ex.printStackTrace();

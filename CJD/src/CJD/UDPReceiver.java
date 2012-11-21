@@ -2,6 +2,7 @@ package CJD;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.nio.ByteBuffer;
 
 public class UDPReceiver {
   public static void ReceiveUDP() {
@@ -28,12 +29,17 @@ public class UDPReceiver {
         // Convert the contents to a string, and display them
         String msg = new String(buffer, 0, packet.getLength());
         
-        //assuming that I know the first 16 bytes are for IP
+        //assuming that I know the first 12 bytes are for IP
         // and the following 8 bytes are for score 
-        //TODO: set the right offset 
-        String IP = msg.substring(0, 15);
-        String scoreString = msg.substring(16, 23);
-        double score = Double.parseDouble(scoreString);
+        String IP = msg.substring(0, 11);
+        byte[] resource = new byte[8];
+        
+        for(int i=0;i<8;++i)
+        {
+        	resource[i]=buffer[12+i];
+        }
+        
+        double score = ByteBuffer.wrap(resource).getDouble();
         NodeManager.Update(IP, score);
         
         //System.out.println(packet.getAddress().getHostName() + ": "
