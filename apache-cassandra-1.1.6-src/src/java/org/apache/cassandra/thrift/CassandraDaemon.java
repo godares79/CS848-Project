@@ -169,7 +169,16 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
             		cjdClient = (CJDInterface) Naming.lookup(url);
             		logger.info("Connected to RMI Server.");
             		
+            		logger.info("ugster01 score = " + cjdClient.GetNodeScore("129.97.173.68"));
+            		logger.info("ugster02 score = " + cjdClient.GetNodeScore("129.97.173.69"));
+            		logger.info("ugster03 score = " + cjdClient.GetNodeScore("129.97.173.70"));
             		logger.info("ugster04 score = " + cjdClient.GetNodeScore("129.97.173.71"));
+            		logger.info("ugster06 score = " + cjdClient.GetNodeScore("129.97.173.73"));
+            		logger.info("ugster07 score = " + cjdClient.GetNodeScore("129.97.173.74"));
+            		logger.info("ugster08 score = " + cjdClient.GetNodeScore("129.97.173.75"));
+            		logger.info("ugster09 score = " + cjdClient.GetNodeScore("129.97.173.76"));
+            		logger.info("ugster10 score = " + cjdClient.GetNodeScore("129.97.173.77"));
+            		logger.info("ugster11 score = " + cjdClient.GetNodeScore("129.97.173.78"));
         		} catch(Exception ex) {
             		ex.printStackTrace();
         		}

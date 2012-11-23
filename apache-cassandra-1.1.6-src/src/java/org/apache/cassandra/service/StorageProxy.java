@@ -673,6 +673,26 @@ public class StorageProxy implements StorageProxyMBean
                  * Sort them according to the usage information.
                  */
                 DatabaseDescriptor.getEndpointSnitch().sortByProximity(FBUtilities.getBroadcastAddress(), endpoints);
+                
+                double leastScore = -1;
+                //InetAddress targetAddress;
+                for (int z = 0; z < endpoints.size(); z++) {
+                	InetAddress addr = endpoints.get(z);
+                	double score = cjdClient.GetNodeScore(addr.getHostAddress());
+                	
+                	if(leastScore == -1)
+                	{
+                		leastScore = score;
+                		endpoints.add(0, endpoints.remove(z));
+                	} else if (score < leastScore) {
+                		leastScore = score;
+                		endpoints.add(0, endpoints.remove(z));
+                	}
+                	
+                	logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
+                }
+                
+                
 
                 RowDigestResolver resolver = new RowDigestResolver(command.table, command.key);
                 ReadCallback<Row> handler = getReadCallback(resolver, command, consistency_level, endpoints);
