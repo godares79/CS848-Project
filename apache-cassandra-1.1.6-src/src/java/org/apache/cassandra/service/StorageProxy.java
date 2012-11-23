@@ -600,7 +600,7 @@ public class StorageProxy implements StorageProxyMBean
     public static List<Row> read(List<ReadCommand> commands, ConsistencyLevel consistency_level)
             throws IOException, UnavailableException, TimeoutException, InvalidRequestException
     {
-    	logger.info("Inside StorageProxy.read...");
+    	//logger.info("Inside StorageProxy.read...");
         if (StorageService.instance.isBootstrapMode())
         {
             ClientRequestMetrics.readUnavailables.inc();
@@ -627,8 +627,8 @@ public class StorageProxy implements StorageProxyMBean
             readStats.addNano(System.nanoTime() - startTime);
         }
         
-        logger.info("StorageProxy read from " + rows.size() + " rows");
-        logger.info("Did so in " + (System.nanoTime() - startTime));
+        //logger.info("StorageProxy read from " + rows.size() + " rows");
+        //logger.info("Did so in " + (System.nanoTime() - startTime));
         return rows;
     }
 
@@ -645,7 +645,7 @@ public class StorageProxy implements StorageProxyMBean
      */
     private static List<Row> fetchRows(List<ReadCommand> initialCommands, ConsistencyLevel consistency_level) throws IOException, UnavailableException, TimeoutException
     {  
-    	logger.info("Inside fetchRows... this is where the actual sending of read requests to the replicas takes place");
+    	//logger.info("Inside fetchRows... this is where the actual sending of read requests to the replicas takes place");
     	//Need to use the CJD client to get the replica data from the CJD
     	CJDInterface cjdClient = org.apache.cassandra.thrift.CassandraDaemon.cjdClient;
     	HashMap<String,Double> resourceScores = org.apache.cassandra.thrift.CassandraDaemon.resourceScores;
