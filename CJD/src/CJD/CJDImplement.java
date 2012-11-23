@@ -2,6 +2,7 @@ package CJD;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 
 public class CJDImplement extends UnicastRemoteObject implements CJDInterface {
 
@@ -19,5 +20,11 @@ public class CJDImplement extends UnicastRemoteObject implements CJDInterface {
 	public double GetNodeScore(String IP) throws RemoteException {
 		// TODO Auto-generated method stub
 		return NodeManager.GetScore(IP);
+	}
+
+	@Override
+	public HashMap<String, Double> GetAllScores() throws RemoteException {
+		// TODO Auto-generated method stub
+		return NodeManager.getNodeRecord();
 	}
 }

@@ -31,6 +31,7 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 import CJD.CJDInterface;
+import java.util.HashMap;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
@@ -647,6 +648,7 @@ public class StorageProxy implements StorageProxyMBean
     	logger.info("Inside fetchRows... this is where the actual sending of read requests to the replicas takes place");
     	//Need to use the CJD client to get the replica data from the CJD
     	CJDInterface cjdClient = org.apache.cassandra.thrift.CassandraDaemon.cjdClient;
+    	HashMap<String,Double> resourceScores = org.apache.cassandra.thrift.CassandraDaemon.resourceScores;
     	
         List<Row> rows = new ArrayList<Row>(initialCommands.size());
         List<ReadCommand> commandsToRetry = Collections.emptyList();
@@ -678,12 +680,11 @@ public class StorageProxy implements StorageProxyMBean
                 //InetAddress targetAddress;
                 for (int z = 0; z < endpoints.size(); z++) {
                 	InetAddress addr = endpoints.get(z);
-                	double score = cjdClient.GetNodeScore(addr.getHostAddress());
+                	double score = resourceScores.get(addr.getHostAddress());
                 	
                 	if(leastScore == -1)
                 	{
                 		leastScore = score;
-                		endpoints.add(0, endpoints.remove(z));
                 	} else if (score < leastScore) {
                 		leastScore = score;
                 		endpoints.add(0, endpoints.remove(z));

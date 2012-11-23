@@ -21,7 +21,9 @@ package org.apache.cassandra.thrift;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
@@ -58,7 +60,9 @@ import CJD.CJDInterface;
 public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassandraDaemon
 {
     protected static CassandraDaemon instance;
+    //Added by David
     public static CJDInterface cjdClient;
+    public static HashMap<String,Double> resourceScores;
 
     static
     {
@@ -71,6 +75,7 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     private final static String HSHA = "hsha";
     public final static List<String> rpc_server_types = Arrays.asList(SYNC, ASYNC, HSHA);
     private ThriftServer server;
+    private CJDMonitor monitor;  //Added by David
 
     protected void startServer()
     {
@@ -78,6 +83,8 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
         {
             server = new ThriftServer(listenAddr, listenPort);
             server.start();
+            monitor = new CJDMonitor();
+            monitor.start();
         }
     }
 
@@ -108,6 +115,43 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     {
         instance = new CassandraDaemon();
         instance.activate();
+    }
+    
+    /**
+     * CJD monitoring thread.
+     */
+    private static class CJDMonitor extends Thread {
+    	public CJDMonitor() {
+    		resourceScores = new HashMap<String,Double>();
+    		while (true) {
+    			
+    			try {
+    				resourceScores = new HashMap<String,Double>(cjdClient.GetAllScores());
+    				logger.info(resourceScores.toString());
+//					resourceScores.put("129.97.173.68", cjdClient.GetNodeScore("129.97.173.68"));
+//					resourceScores.put("129.97.173.69", cjdClient.GetNodeScore("129.97.173.69"));
+//					resourceScores.put("129.97.173.70", cjdClient.GetNodeScore("129.97.173.70"));
+//					resourceScores.put("129.97.173.71", cjdClient.GetNodeScore("129.97.173.71"));
+//					resourceScores.put("129.97.173.73", cjdClient.GetNodeScore("129.97.173.73"));
+//					resourceScores.put("129.97.173.74", cjdClient.GetNodeScore("129.97.173.74"));
+//					resourceScores.put("129.97.173.75", cjdClient.GetNodeScore("129.97.173.75"));
+//					resourceScores.put("129.97.173.76", cjdClient.GetNodeScore("129.97.173.76"));
+//					resourceScores.put("129.97.173.77", cjdClient.GetNodeScore("129.97.173.77"));
+//					resourceScores.put("129.97.173.78", cjdClient.GetNodeScore("129.97.173.78"));
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    			
+    			try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    	}
+    	
     }
 
     /**
