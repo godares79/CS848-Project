@@ -690,7 +690,7 @@ public class StorageProxy implements StorageProxyMBean
                 		endpoints.add(0, endpoints.remove(z));
                 	}
                 	
-                	logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
+                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
                 }
                 
                 
