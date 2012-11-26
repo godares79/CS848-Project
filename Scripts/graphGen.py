@@ -51,7 +51,7 @@ datFile.close()
 
 # Create the script file
 plotFile = open("data.plot", 'w')
-plotFile.write("#! /usr/bin/gnuplot\nset terminal png linewidth 1\nset output \"out.png\"\nset title \"Experiment Performance\"\nset xlabel \"Time\"\nset ylabel \"Operations/second\"\n")
+plotFile.write("#! /usr/local/bin/gnuplot\nset terminal postscript linewidth 1 enhanced color\nset output '| ps2pdf - plot.pdf'\nset title \"Experiment Performance\"\nset xlabel \"Time\"\nset ylabel \"Operations/second\"\n")
 
 plotString = "plot "
 index = 1
