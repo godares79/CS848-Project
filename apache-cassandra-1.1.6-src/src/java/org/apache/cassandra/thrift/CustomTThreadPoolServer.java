@@ -100,7 +100,7 @@ public class CustomTThreadPoolServer extends TServer
             {
                 TTransport client = serverTransport_.accept();
                 activeClients.incrementAndGet();
-                LOGGER.info("Number of active clients = " + activeClients.toString());
+                //LOGGER.info("Number of active clients = " + activeClients.toString());
                 WorkerProcess wp = new WorkerProcess(client);
                 executorService_.execute(wp);
             }
@@ -176,7 +176,7 @@ public class CustomTThreadPoolServer extends TServer
             TProtocol outputProtocol = null;
             try
             {
-            	LOGGER.info("Setting up client information");
+            	//LOGGER.info("Setting up client information");
             	
                 processor = processorFactory_.getProcessor(client_);
                 inputTransport = inputTransportFactory_.getTransport(client_);

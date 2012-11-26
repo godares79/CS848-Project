@@ -32,4 +32,7 @@ public class NodeManager {
 		return result;
 	}
 	
+	public static HashMap<String, Double> getNodeRecord() {
+		return NodeRecord;
+	}
 }
