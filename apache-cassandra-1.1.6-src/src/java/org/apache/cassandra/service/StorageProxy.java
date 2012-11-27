@@ -676,40 +676,43 @@ public class StorageProxy implements StorageProxyMBean
                  */
                 DatabaseDescriptor.getEndpointSnitch().sortByProximity(FBUtilities.getBroadcastAddress(), endpoints);
                 
-                double leastScore = -1;
-                //InetAddress targetAddress;
-                for (int z = 0; z < endpoints.size(); z++) {
-                	InetAddress addr = endpoints.get(z);
-                	double score = resourceScores.get(addr.getHostAddress());
-                	
-                	if(leastScore == -1)
-                	{
-                		leastScore = score;
-                	} else if (score < leastScore) {
-                		leastScore = score;
-                		endpoints.add(0, endpoints.remove(z));
-                	}
-                	
-                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
+                if(!endpoints.get(0).equals(FBUtilities.getBroadcastAddress()))
+                {
+	            	double leastScore = -1;
+	                for (int z = 0; z < endpoints.size(); z++) {
+	                	InetAddress addr = endpoints.get(z);
+	                	double score = resourceScores.get(addr.getHostAddress());
+	                	
+	                	if(leastScore == -1)
+	                	{
+	                		leastScore = score;
+	                	} else if (score < leastScore) {
+	                		leastScore = score;
+	                		endpoints.add(0, endpoints.remove(z));
+	                	}
+	                	
+	                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
+	                }
                 }
-                
-                
 
                 RowDigestResolver resolver = new RowDigestResolver(command.table, command.key);
                 ReadCallback<Row> handler = getReadCallback(resolver, command, consistency_level, endpoints);
                 handler.assureSufficientLiveNodes();
                 assert !handler.endpoints.isEmpty();
                 readCallbacks[i] = handler;
-
+                
                 // The data-request message is sent to dataPoint, the node that will actually get the data for us
                 InetAddress dataPoint = handler.endpoints.get(0);
                 if (dataPoint.equals(FBUtilities.getBroadcastAddress()) && OPTIMIZE_LOCAL_REQUESTS)
                 {
+                	
+                    
                     logger.debug("reading data locally");
                     StageManager.getStage(Stage.READ).execute(new LocalReadRunnable(command, handler));
                 }
                 else
-                {
+                {   
+
                     logger.debug("reading data from {}", dataPoint);
                     MessagingService.instance().sendRR(command, dataPoint, handler);
                 }

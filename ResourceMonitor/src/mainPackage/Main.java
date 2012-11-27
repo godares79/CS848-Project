@@ -58,7 +58,7 @@ public class Main {
 			}
 
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -136,7 +136,7 @@ public class Main {
 	private static void sendResourceUsage(byte[] message) {
 		// Will need to change the host to be the central server
 		try {
-			String host = "127.0.0.1";
+			String host = "ugster02.student.cs.uwaterloo.ca";
 			int port = 9040;
 
 			// byte[] message = resourceUsage.getBytes();
