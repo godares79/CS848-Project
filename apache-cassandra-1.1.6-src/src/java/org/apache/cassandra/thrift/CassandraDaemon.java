@@ -63,6 +63,7 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     //Added by David
     public static CJDInterface cjdClient;
     public static HashMap<String,Double> resourceScores;
+    public static HashMap<String,Double> tempResourceScores;
 
     static
     {
@@ -126,7 +127,8 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     		while (true) {
     			
     			try {
-    				resourceScores = new HashMap<String,Double>(cjdClient.GetAllScores());
+    				tempResourceScores = new HashMap<String,Double>(cjdClient.GetAllScores());
+    				resourceScores = tempResourceScores;
     				//logger.info(resourceScores.toString());
 //					resourceScores.put("129.97.173.68", cjdClient.GetNodeScore("129.97.173.68"));
 //					resourceScores.put("129.97.173.69", cjdClient.GetNodeScore("129.97.173.69"));
@@ -144,7 +146,7 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
 				}
     			
     			try {
-					Thread.sleep(10000);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

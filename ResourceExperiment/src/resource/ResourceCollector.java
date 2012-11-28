@@ -1,5 +1,6 @@
 package resource;
 
+import java.io.IOException;
 import java.util.Calendar;
 import com.jezhumble.javasysmon.*;
 
@@ -15,24 +16,30 @@ public class ResourceCollector {
 
 		System.out.println("ResourceExperiment starts !!! ^_^ ");
         
-        Calendar cal = Calendar.getInstance();
+        Calendar cal;
+
         while(true)
         {
-            System.out.println("\n");
-			System.out.println(cal.getTime());
-            System.out.println("CPU: "+ getCPUUsage() +"\n");
-            System.out.println("Memory: "  +"\n");
-            System.out.println("Process table Length: " + monitor.processTable().length + "\n");
-            System.out.println("Swap: " + getFreeSwap() + "\n");
-            System.out.println(cal.getTime());
+            System.out.print("\n");
+            System.out.print("CPU: "+ getCPUUsage() +"\n");
+            System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
+            System.out.print("Process table Length: " + monitor.processTable().length + "\n");
+            System.out.print("Swap: " + getFreeSwap() + "\n");
+            cal = Calendar.getInstance();
+            double beforeTime = cal.getTime().getTime();
             //do the job
-            System.out.println(cal.getTime());
-            System.out.println("CPU: "+ getCPUUsage() +"\n");
-            System.out.println("Memory: "  +"\n");
-            System.out.println("Process table Length: " + monitor.processTable().length + "\n");
-            System.out.println("Swap: " + getFreeSwap() + "\n");
-            System.out.println(cal.getTime());
-            System.out.println("\n");
+            Runtime rt = Runtime.getRuntime();
+            try {
+				Process p = rt.exec("/Users/daviddietrich/Downloads/unixbench-5.1.2/pgms/multi.sh 100");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            cal = Calendar.getInstance();
+            double afterTime = cal.getTime().getTime();
+
+            System.out.println("Time: " + (afterTime-beforeTime));
+            System.out.print("\n");
         }
 	}
 	
@@ -44,9 +51,9 @@ public class ResourceCollector {
 		// previous CPU time
 		CpuTimes pre = new CpuTimes(user, system, idle);
 
-		// sleep for 10 mm sec
+		// sleep for 500 mm sec
 		try {
-			Thread.sleep(10);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -69,7 +76,7 @@ public class ResourceCollector {
 		long freeSwap = monitor.swap().getFreeBytes();
 		long totalSwap = monitor.swap().getTotalBytes();
 		
-		return (double) (totalSwap - freeSwap / totalSwap);
+		return (double) ( (totalSwap - freeSwap) / totalSwap);
 	}
 
 }

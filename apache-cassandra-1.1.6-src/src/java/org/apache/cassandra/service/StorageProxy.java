@@ -38,6 +38,9 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Multimap;
+import com.jezhumble.javasysmon.CpuTimes;
+import com.jezhumble.javasysmon.JavaSysMon;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -66,6 +69,13 @@ import org.apache.cassandra.utils.*;
 
 public class StorageProxy implements StorageProxyMBean
 {
+	//added for resource experiment 
+	static JavaSysMon monitor = new JavaSysMon();
+	static Calendar cal;
+	 
+	//Some of the references that we require for scheduling
+	private static HashMap<String,Double> resourceScores = org.apache.cassandra.thrift.CassandraDaemon.resourceScores;
+	
     public static final String MBEAN_NAME = "org.apache.cassandra.db:type=StorageProxy";
     private static final Logger logger = LoggerFactory.getLogger(StorageProxy.class);
     private static final boolean OPTIMIZE_LOCAL_REQUESTS = true; // set to false to test messagingservice path on single node
@@ -647,9 +657,6 @@ public class StorageProxy implements StorageProxyMBean
     {  
     	//logger.info("Inside fetchRows... this is where the actual sending of read requests to the replicas takes place");
     	//Need to use the CJD client to get the replica data from the CJD
-    	CJDInterface cjdClient = org.apache.cassandra.thrift.CassandraDaemon.cjdClient;
-    	HashMap<String,Double> resourceScores = org.apache.cassandra.thrift.CassandraDaemon.resourceScores;
-    	
         List<Row> rows = new ArrayList<Row>(initialCommands.size());
         List<ReadCommand> commandsToRetry = Collections.emptyList();
 
@@ -676,24 +683,24 @@ public class StorageProxy implements StorageProxyMBean
                  */
                 DatabaseDescriptor.getEndpointSnitch().sortByProximity(FBUtilities.getBroadcastAddress(), endpoints);
                 
-                if(!endpoints.get(0).equals(FBUtilities.getBroadcastAddress()))
-                {
-	            	double leastScore = -1;
-	                for (int z = 0; z < endpoints.size(); z++) {
-	                	InetAddress addr = endpoints.get(z);
-	                	double score = resourceScores.get(addr.getHostAddress());
-	                	
-	                	if(leastScore == -1)
-	                	{
-	                		leastScore = score;
-	                	} else if (score < leastScore) {
-	                		leastScore = score;
-	                		endpoints.add(0, endpoints.remove(z));
-	                	}
-	                	
-	                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
-	                }
-                }
+//                if(!endpoints.get(0).equals(FBUtilities.getBroadcastAddress()))
+//                {
+//	            	double leastScore = -1;
+//	                for (int z = 0; z < endpoints.size(); z++) {
+//	                	InetAddress addr = endpoints.get(z);
+//	                	double score = resourceScores.get(addr.getHostAddress());
+//	                	
+//	                	if(leastScore == -1)
+//	                	{
+//	                		leastScore = score;
+//	                	} else if (score < leastScore) {
+//	                		leastScore = score;
+//	                		endpoints.add(0, endpoints.remove(z));
+//	                	}
+//	                	
+//	                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
+//	                }
+//                }
 
                 RowDigestResolver resolver = new RowDigestResolver(command.table, command.key);
                 ReadCallback<Row> handler = getReadCallback(resolver, command, consistency_level, endpoints);
@@ -705,16 +712,43 @@ public class StorageProxy implements StorageProxyMBean
                 InetAddress dataPoint = handler.endpoints.get(0);
                 if (dataPoint.equals(FBUtilities.getBroadcastAddress()) && OPTIMIZE_LOCAL_REQUESTS)
                 {
-                	
-                    
                     logger.debug("reading data locally");
+                    
+                    //System.out.print("\n");
+                    System.out.print(getCPUUsage() + " ");
+//                    System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
+//                    System.out.print("Process table Length: " + monitor.processTable().length + "\n");
+//                    System.out.print("Swap: " + getFreeSwap() + "\n");
+//                    cal = Calendar.getInstance();
+                    long beforeTime = System.nanoTime();
+                    
                     StageManager.getStage(Stage.READ).execute(new LocalReadRunnable(command, handler));
+                    
+                    //cal = Calendar.getInstance();
+                    long afterTime = System.nanoTime();
+
+                    System.out.println((afterTime-beforeTime));
+                    //System.out.print("\n");
                 }
                 else
                 {   
-
                     logger.debug("reading data from {}", dataPoint);
+                    
+                    System.out.print("\n");
+                    System.out.print("CPU: "+ getCPUUsage() +"\n");
+                    System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
+                    System.out.print("Process table Length: " + monitor.processTable().length + "\n");
+                    System.out.print("Swap: " + getFreeSwap() + "\n");
+                    cal = Calendar.getInstance();
+                    long beforeTime = cal.getTime().getTime();
+                    
                     MessagingService.instance().sendRR(command, dataPoint, handler);
+                    
+                    cal = Calendar.getInstance();
+                    long afterTime = cal.getTime().getTime();
+
+                    System.out.println("Time: " + (afterTime-beforeTime));
+                    System.out.print("\n");
                 }
 
                 if (handler.endpoints.size() == 1)
@@ -878,6 +912,14 @@ public class StorageProxy implements StorageProxyMBean
     {
         if (logger.isDebugEnabled())
             logger.debug("Command/ConsistencyLevel is {}/{}", command.toString(), consistency_level);
+        
+        //added for resource experiment 
+        //System.out.print("\n");
+        System.out.print(getCPUUsage() +" ");
+        //System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
+        //System.out.print("Process table Length: " + monitor.processTable().length + "\n");
+        //System.out.print("Swap: " + getFreeSwap() + "\n");
+        
         long startTime = System.nanoTime();
         List<Row> rows;
         // now scan until we have enough results
@@ -965,10 +1007,51 @@ public class StorageProxy implements StorageProxyMBean
         }
         finally
         {
+            //added
+            System.out.println(System.nanoTime() - startTime);
+            
             rangeStats.addNano(System.nanoTime() - startTime);
+
         }
         return trim(command, rows);
     }
+    
+    //added function for resource experiment
+    private static float getCPUUsage() {
+		long idle = monitor.cpuTimes().getIdleMillis();
+		long system = monitor.cpuTimes().getSystemMillis();
+		long user = monitor.cpuTimes().getUserMillis();
+		float cpuUsage = 0;
+		// previous CPU time
+		CpuTimes pre = new CpuTimes(user, system, idle);
+
+		// sleep for 500 mm sec
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		// calculating CPU usage
+		cpuUsage = monitor.cpuTimes().getCpuUsage(pre);
+		return cpuUsage;
+	} 
+	
+	private static double getFreeFromMemory() {
+		long remainMemory = 0;
+		remainMemory = monitor.physical().getFreeBytes();
+		long totalMemory = monitor.physical().getTotalBytes();
+		double memory = (double) (totalMemory - remainMemory) / totalMemory;
+		
+		return memory;		
+	}
+	
+	private static double getFreeSwap(){
+		long freeSwap = monitor.swap().getFreeBytes();
+		long totalSwap = monitor.swap().getTotalBytes();
+		
+		return (double) ( (totalSwap - freeSwap) / totalSwap);
+	}
 
     private static List<Row> trim(RangeSliceCommand command, List<Row> rows)
     {
