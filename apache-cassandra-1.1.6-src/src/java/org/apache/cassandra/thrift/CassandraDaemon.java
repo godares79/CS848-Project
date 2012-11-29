@@ -128,6 +128,8 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     			
     			try {
     				tempResourceScores = new HashMap<String,Double>(cjdClient.GetAllScores());
+    				//logger.info(tempResourceScores.toString());
+    				//logger.info(resourceScores.toString());
     				resourceScores = tempResourceScores;
     				//logger.info(resourceScores.toString());
 //					resourceScores.put("129.97.173.68", cjdClient.GetNodeScore("129.97.173.68"));

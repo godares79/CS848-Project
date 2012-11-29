@@ -23,7 +23,7 @@ public class Main {
 		// few
 		// seconds and sent it back to the central server
 		while (true) {
-			System.out.println("Collecting resource information");
+			//System.out.println("Collecting resource information");
 
 			// just put some random things here for now
 			try {
@@ -102,6 +102,14 @@ public class Main {
 		currentMemoryRemain = monitor.physical().getFreeBytes();
 		return currentMemoryRemain;
 	}
+	private long getUsedBytesFremMemory() {
+		JavaSysMon monitor = new JavaSysMon();
+		long currentMemoryRemain = 0;
+		currentMemoryRemain = monitor.physical().getFreeBytes();
+		long totalMem = 0;
+		totalMem = monitor.physical().getTotalBytes();
+		return (totalMem-currentMemoryRemain);
+	}
 
 	/**
 	 * @return current CPU usage Ben
@@ -117,7 +125,7 @@ public class Main {
 
 		// sleep for 10 mm sec
 		try {
-			Thread.sleep(10);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -136,7 +144,7 @@ public class Main {
 	private static void sendResourceUsage(byte[] message) {
 		// Will need to change the host to be the central server
 		try {
-			String host = "ugster02.student.cs.uwaterloo.ca";
+			String host = "127.0.0.1";
 			int port = 9040;
 
 			// byte[] message = resourceUsage.getBytes();

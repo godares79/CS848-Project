@@ -31,12 +31,12 @@ public class UDPReceiver {
         
         //assuming that I know the first 12 bytes are for IP
         // and the following 8 bytes are for score 
-        String IP = msg.substring(0, 11);
+        String IP = msg.substring(0, 13);
         byte[] resource = new byte[8];
         
         for(int i=0;i<8;++i)
         {
-        	resource[i]=buffer[12+i];
+        	resource[i]=buffer[13+i];
         }
         
         double score = ByteBuffer.wrap(resource).getDouble();

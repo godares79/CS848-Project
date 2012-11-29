@@ -13,7 +13,7 @@ public class NodeManager {
 	public static void Update(String IP, Double score)
 	{
 		NodeRecord.put(IP,score);
-		System.out.println(NodeRecord.toString());
+		//System.out.println(NodeRecord.toString());
 	}
 	
 	public static Double GetScore(String IP)

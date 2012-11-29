@@ -74,7 +74,7 @@ public class StorageProxy implements StorageProxyMBean
 	static Calendar cal;
 	 
 	//Some of the references that we require for scheduling
-	private static HashMap<String,Double> resourceScores = org.apache.cassandra.thrift.CassandraDaemon.resourceScores;
+	//private static HashMap<String,Double> resourceScores = org.apache.cassandra.thrift.CassandraDaemon.resourceScores;
 	
     public static final String MBEAN_NAME = "org.apache.cassandra.db:type=StorageProxy";
     private static final Logger logger = LoggerFactory.getLogger(StorageProxy.class);
@@ -683,24 +683,26 @@ public class StorageProxy implements StorageProxyMBean
                  */
                 DatabaseDescriptor.getEndpointSnitch().sortByProximity(FBUtilities.getBroadcastAddress(), endpoints);
                 
-//                if(!endpoints.get(0).equals(FBUtilities.getBroadcastAddress()))
-//                {
-//	            	double leastScore = -1;
-//	                for (int z = 0; z < endpoints.size(); z++) {
-//	                	InetAddress addr = endpoints.get(z);
-//	                	double score = resourceScores.get(addr.getHostAddress());
-//	                	
-//	                	if(leastScore == -1)
-//	                	{
-//	                		leastScore = score;
-//	                	} else if (score < leastScore) {
-//	                		leastScore = score;
-//	                		endpoints.add(0, endpoints.remove(z));
-//	                	}
-//	                	
-//	                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
-//	                }
-//                }
+                if(!endpoints.get(0).equals(FBUtilities.getBroadcastAddress()))
+                {
+	            	double leastScore = -1;
+	                for (int z = 0; z < endpoints.size(); z++) {
+	                	InetAddress addr = endpoints.get(z);
+	                	//logger.info(addr.getHostAddress());
+	                	//logger.info(org.apache.cassandra.thrift.CassandraDaemon.resourceScores.toString());
+	                	double score = org.apache.cassandra.thrift.CassandraDaemon.resourceScores.get(addr.getHostAddress());
+	                	//TODO 
+	                	if(leastScore == -1)
+	                	{
+	                		leastScore = score;
+	                	} else if (score < leastScore) {
+	                		leastScore = score;
+	                		endpoints.add(0, endpoints.remove(z));
+	                	}
+	                	
+	                	//logger.info(addr.getHostAddress() + ":" + score + ":" + endpoints.get(0).getHostAddress());
+	                }
+                }
 
                 RowDigestResolver resolver = new RowDigestResolver(command.table, command.key);
                 ReadCallback<Row> handler = getReadCallback(resolver, command, consistency_level, endpoints);
@@ -715,40 +717,43 @@ public class StorageProxy implements StorageProxyMBean
                     logger.debug("reading data locally");
                     
                     //System.out.print("\n");
-                    System.out.print(getCPUUsage() + " ");
+                    //System.out.print(getCPUUsage() + " ");
 //                    System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
-//                    System.out.print("Process table Length: " + monitor.processTable().length + "\n");
+                    System.out.print( monitor.processTable().length + " ");
 //                    System.out.print("Swap: " + getFreeSwap() + "\n");
-//                    cal = Calendar.getInstance();
+                    cal = Calendar.getInstance();
                     long beforeTime = System.nanoTime();
-                    
+                    //long totalMemory = Runtime.getRuntime().totalMemory();
+                    //long freeMemory = Runtime.getRuntime().freeMemory();
+                    //System.out.println( totalMemory + " " + freeMemory + " " + (double) freeMemory/totalMemory);
+                    //System.out.print( (totalMemory-freeMemory) + " " );
                     StageManager.getStage(Stage.READ).execute(new LocalReadRunnable(command, handler));
                     
-                    //cal = Calendar.getInstance();
+                    cal = Calendar.getInstance();
                     long afterTime = System.nanoTime();
 
-                    System.out.println((afterTime-beforeTime));
-                    //System.out.print("\n");
+                    System.out.print((afterTime-beforeTime));
+                    System.out.print("\n");
                 }
                 else
                 {   
                     logger.debug("reading data from {}", dataPoint);
                     
-                    System.out.print("\n");
-                    System.out.print("CPU: "+ getCPUUsage() +"\n");
-                    System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
-                    System.out.print("Process table Length: " + monitor.processTable().length + "\n");
-                    System.out.print("Swap: " + getFreeSwap() + "\n");
-                    cal = Calendar.getInstance();
-                    long beforeTime = cal.getTime().getTime();
+//                    System.out.print("\n");
+//                    System.out.print("CPU: "+ getCPUUsage() +"\n");
+//                    System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
+//                    System.out.print("Process table Length: " + monitor.processTable().length + "\n");
+//                    System.out.print("Swap: " + getFreeSwap() + "\n");
+//                    cal = Calendar.getInstance();
+//                    long beforeTime = cal.getTime().getTime();
                     
                     MessagingService.instance().sendRR(command, dataPoint, handler);
                     
-                    cal = Calendar.getInstance();
-                    long afterTime = cal.getTime().getTime();
-
-                    System.out.println("Time: " + (afterTime-beforeTime));
-                    System.out.print("\n");
+//                    cal = Calendar.getInstance();
+//                    long afterTime = cal.getTime().getTime();
+//
+//                    System.out.println("Time: " + (afterTime-beforeTime));
+//                    System.out.print("\n");
                 }
 
                 if (handler.endpoints.size() == 1)

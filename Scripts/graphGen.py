@@ -33,6 +33,24 @@ for line in lines:
 itemsList.sort(key=lambda k: (k[0]))
 #print itemsList
 
+# Find an average of the items list
+previous = 10
+average = 0
+print "Will print out the average line here:"
+for item in itemsList:
+	if item[0] == previous:
+		average = average + item[1]
+	else:
+		average=average/5
+		print str(previous) + " " + str(average)
+		previous = item[0]
+		average = item[1]
+average=average/5
+print str(previous) + " " + str(average)
+previous = item[0]
+average = item[1]
+datFile.close()
+
 datFile = open("data.dat", 'w')
 previous = 0
 for item in itemsList:
