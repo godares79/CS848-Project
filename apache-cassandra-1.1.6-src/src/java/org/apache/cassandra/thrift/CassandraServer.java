@@ -30,6 +30,8 @@ import java.util.zip.Inflater;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
+import com.jezhumble.javasysmon.JavaSysMon;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -265,6 +267,16 @@ public class CassandraServer implements Cassandra.Iface
     throws InvalidRequestException, UnavailableException, TimedOutException
     {
     	logger.debug("Inside getSlice...");
+    	
+    	
+    	long startTime = System.nanoTime();
+    	//The resource usage information
+    	System.out.print("CPUUsage = " + org.apache.cassandra.thrift.CassandraDaemon.cpuUsage + ";");
+    	System.out.print("Used Memory = " + org.apache.cassandra.thrift.CassandraDaemon.usedMemory + ";");
+    	System.out.print("Free Memory = " + org.apache.cassandra.thrift.CassandraDaemon.freeMemory + ";");
+    	System.out.print("Number Processes = " + org.apache.cassandra.thrift.CassandraDaemon.numberProcesses + ";");
+    	System.out.print("Number Threads = " + org.apache.cassandra.thrift.CassandraDaemon.numberCassandraThreads + ";");
+    	
         Map<DecoratedKey, ColumnFamily> columnFamilies = readColumnFamily(commands, consistency_level);
         Map<ByteBuffer, List<ColumnOrSuperColumn>> columnFamiliesMap = new HashMap<ByteBuffer, List<ColumnOrSuperColumn>>();
         for (ReadCommand command: commands)
@@ -275,6 +287,9 @@ public class CassandraServer implements Cassandra.Iface
             columnFamiliesMap.put(command.key, thriftifiedColumns);
         }
 
+        long endTime = System.nanoTime();
+        System.out.println("Runtime = " + (endTime-startTime));
+        
         return columnFamiliesMap;
     }
 

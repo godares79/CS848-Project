@@ -46,6 +46,9 @@ import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.apache.thrift.transport.TTransportFactory;
 
+import com.jezhumble.javasysmon.CpuTimes;
+import com.jezhumble.javasysmon.JavaSysMon;
+
 import CJD.CJDInterface;
 
 /**
@@ -64,6 +67,11 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     public static CJDInterface cjdClient;
     public static HashMap<String,Double> resourceScores;
     public static HashMap<String,Double> tempResourceScores;
+    public static double cpuUsage;
+    public static long usedMemory;
+    public static long freeMemory;
+    public static long numberProcesses;
+    public static long numberCassandraThreads;
 
     static
     {
@@ -77,6 +85,7 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
     public final static List<String> rpc_server_types = Arrays.asList(SYNC, ASYNC, HSHA);
     private ThriftServer server;
     private CJDMonitor monitor;  //Added by David
+    private ResourcesMon resMon; //Added by David
 
     protected void startServer()
     {
@@ -86,6 +95,8 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
             server.start();
             monitor = new CJDMonitor();
             monitor.start();
+            resMon = new ResourcesMon();
+            resMon.start();
         }
     }
 
@@ -122,26 +133,14 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
      * CJD monitoring thread.
      */
     private static class CJDMonitor extends Thread {
-    	public CJDMonitor() {
+    	public CJDMonitor() {}
+    	
+    	public void run() {
     		resourceScores = new HashMap<String,Double>();
-    		while (true) {
-    			
+    		while (true) {	
     			try {
     				tempResourceScores = new HashMap<String,Double>(cjdClient.GetAllScores());
-    				//logger.info(tempResourceScores.toString());
-    				//logger.info(resourceScores.toString());
     				resourceScores = tempResourceScores;
-    				//logger.info(resourceScores.toString());
-//					resourceScores.put("129.97.173.68", cjdClient.GetNodeScore("129.97.173.68"));
-//					resourceScores.put("129.97.173.69", cjdClient.GetNodeScore("129.97.173.69"));
-//					resourceScores.put("129.97.173.70", cjdClient.GetNodeScore("129.97.173.70"));
-//					resourceScores.put("129.97.173.71", cjdClient.GetNodeScore("129.97.173.71"));
-//					resourceScores.put("129.97.173.73", cjdClient.GetNodeScore("129.97.173.73"));
-//					resourceScores.put("129.97.173.74", cjdClient.GetNodeScore("129.97.173.74"));
-//					resourceScores.put("129.97.173.75", cjdClient.GetNodeScore("129.97.173.75"));
-//					resourceScores.put("129.97.173.76", cjdClient.GetNodeScore("129.97.173.76"));
-//					resourceScores.put("129.97.173.77", cjdClient.GetNodeScore("129.97.173.77"));
-//					resourceScores.put("129.97.173.78", cjdClient.GetNodeScore("129.97.173.78"));
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -155,8 +154,44 @@ public class CassandraDaemon extends org.apache.cassandra.service.AbstractCassan
 				}
     		}
     	}
-    	
     }
+    private static class ResourcesMon extends Thread {
+		public ResourcesMon() {}
+		
+		public void run() {
+			while (true) {
+				//Implement the resource monitoring stuff in here, and then have the other
+				//methods access it
+				JavaSysMon monitor = new JavaSysMon();
+				long idle = monitor.cpuTimes().getIdleMillis();
+				long system = monitor.cpuTimes().getSystemMillis();
+				long user = monitor.cpuTimes().getUserMillis();
+				// previous CPU time
+				CpuTimes pre = new CpuTimes(user, system, idle);
+
+				// sleep for 10 mm sec
+				try {
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				// calculating CPU usage
+				cpuUsage = monitor.cpuTimes().getCpuUsage(pre);
+				
+				//Get free memory
+				freeMemory = monitor.physical().getFreeBytes();
+				//Get used memory
+				usedMemory = (monitor.physical().getTotalBytes() - freeMemory);
+				
+				//Get number of processes
+				numberProcesses = monitor.processTable().length;
+				
+				//Get number of cassandra threads
+				numberCassandraThreads = Thread.getAllStackTraces().size();
+			}
+		}
+	}
 
     /**
      * Simple class to run the thrift connection accepting code in separate

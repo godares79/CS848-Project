@@ -655,7 +655,7 @@ public class StorageProxy implements StorageProxyMBean
      */
     private static List<Row> fetchRows(List<ReadCommand> initialCommands, ConsistencyLevel consistency_level) throws IOException, UnavailableException, TimeoutException
     {  
-    	//logger.info("Inside fetchRows... this is where the actual sending of read requests to the replicas takes place");
+    	//logger.info("Inside fetchRows...q this is where the actual sending of read requests to the replicas takes place");
     	//Need to use the CJD client to get the replica data from the CJD
         List<Row> rows = new ArrayList<Row>(initialCommands.size());
         List<ReadCommand> commandsToRetry = Collections.emptyList();
@@ -719,21 +719,21 @@ public class StorageProxy implements StorageProxyMBean
                     //System.out.print("\n");
                     //System.out.print(getCPUUsage() + " ");
 //                    System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
-                    System.out.print( monitor.processTable().length + " ");
+                    //System.out.print( monitor.processTable().length + " ");
 //                    System.out.print("Swap: " + getFreeSwap() + "\n");
-                    cal = Calendar.getInstance();
-                    long beforeTime = System.nanoTime();
+                    //cal = Calendar.getInstance();
+                    //long beforeTime = System.nanoTime();
                     //long totalMemory = Runtime.getRuntime().totalMemory();
                     //long freeMemory = Runtime.getRuntime().freeMemory();
                     //System.out.println( totalMemory + " " + freeMemory + " " + (double) freeMemory/totalMemory);
                     //System.out.print( (totalMemory-freeMemory) + " " );
                     StageManager.getStage(Stage.READ).execute(new LocalReadRunnable(command, handler));
                     
-                    cal = Calendar.getInstance();
-                    long afterTime = System.nanoTime();
+                    //cal = Calendar.getInstance();
+                    //long afterTime = System.nanoTime();
 
-                    System.out.print((afterTime-beforeTime));
-                    System.out.print("\n");
+                    //System.out.print((afterTime-beforeTime));
+                    //System.out.print("\n");
                 }
                 else
                 {   
@@ -746,6 +746,7 @@ public class StorageProxy implements StorageProxyMBean
 //                    System.out.print("Swap: " + getFreeSwap() + "\n");
 //                    cal = Calendar.getInstance();
 //                    long beforeTime = cal.getTime().getTime();
+                    
                     
                     MessagingService.instance().sendRR(command, dataPoint, handler);
                     
