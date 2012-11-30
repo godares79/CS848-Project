@@ -921,7 +921,7 @@ public class StorageProxy implements StorageProxyMBean
         
         //added for resource experiment 
         //System.out.print("\n");
-        System.out.print(getCPUUsage() +" ");
+        //System.out.print(getCPUUsage() +" ");
         //System.out.print("Memory: "+ getFreeFromMemory()  +"\n");
         //System.out.print("Process table Length: " + monitor.processTable().length + "\n");
         //System.out.print("Swap: " + getFreeSwap() + "\n");
@@ -1014,7 +1014,7 @@ public class StorageProxy implements StorageProxyMBean
         finally
         {
             //added
-            System.out.println(System.nanoTime() - startTime);
+            //System.out.println(System.nanoTime() - startTime);
             
             rangeStats.addNano(System.nanoTime() - startTime);
 
