@@ -4,6 +4,13 @@
 for var in "$@"
 do
 
+  if [ "$var" == "ScheduledExperiments/" ]; then
+    continue
+  fi
+  if [ "$var" == "BaselineExperiments/" ]; then
+    continue
+  fi
+
   index=1
   while [ $index -le 5 ]
   do
