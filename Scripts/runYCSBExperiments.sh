@@ -20,6 +20,8 @@ do
     `ssh d4dietri@ugster02 '/opt/apache-cassandra-1.1.6/bin/cassandra </dev/null >/dev/null 2>&1 &'`
     `ssh d4dietri@ugster02 '/home/d4dietri/startCassandra.sh'`
   
+    sleep 60
+	
     echo "$var"
     echo "***" >> $1/$var.output
     echo "Run_$index" >> $1/$var.output
