@@ -1,0 +1,16 @@
+This will serve as a place to record some notes and ideas for the course
+paper as they are thought of…
+
+- Single evaluation section, separate subsections for simulation and 
+  physical server evaluation
+- Really need to justify why we check what resource information we do
+  in order to gather the server load
+- Zipfian distribution for data load curve
+
+- Compare our scheduler, to the current cassandra method of sending
+a read request to all replicas and then using the first returned one
+   Our will hopefully be better
+- Use GNUPlot to create the graphs
+- The Read Digest in Cassandra is sent to all other nodes and each node returns
+  a hash value and timestamp of the data. If it is out of date, then the new
+  data is pushed to the node.
