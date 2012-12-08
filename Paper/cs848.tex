@@ -65,6 +65,12 @@ The performance is measured in terms of operations per second that are performed
 \subsection{Experimental Results}
 The performance with and without the scheduler is compared in each graph; the dashed line is the performance of the baseline Cassandra and the solid line is the performance using our scheduler. The Cassandra cluster was restarted between every run. The results are averaged over 3 runs each.
 
+\begin{figure*}[t]
+
+\caption{The experimental results of performing the 100\% read workload on the 10GB database.}
+\label{fig:10g_reads}
+\end{figure*}
+
 The results of the 10GB experiment are shown in Figure X. As can be seen, the version of Cassandra using the resource based query assignment did not perform as well as the baseline Cassandra in any of the five experiments.
 
 The results of the 150GB experiment are shown in Figure Y. Even with 100 parallel clients sending queries to the database, the node servers CPU usage and memory usage was still quite low. It seems that hard-disk accesses are the major bottleneck, which we have not accounted for in our method. The Cassandra read-digest~\cite{http://wiki.apache.org/cassandra/DigestQueries} also accounts for the slow performance, as even though you may read the data from the lowest resource usage server, you still need to access the other two servers in order to get the hash value and timestamp for the data.
