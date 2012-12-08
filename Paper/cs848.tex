@@ -66,18 +66,44 @@ The performance is measured in terms of operations per second that are performed
 The performance with and without the scheduler is compared in each graph; the dashed line is the performance of the baseline Cassandra and the solid line is the performance using our scheduler. The Cassandra cluster was restarted between every run. The results are averaged over 3 runs each.
 
 \begin{figure*}[t]
-
+\centering
+\includegraphics[scale=0.5]{images/10GB_Reads.pdf}
+\vspace{-15pt}
 \caption{The experimental results of performing the 100\% read workload on the 10GB database.}
 \label{fig:10g_reads}
 \end{figure*}
 
 The results of the 10GB experiment are shown in Figure X. As can be seen, the version of Cassandra using the resource based query assignment did not perform as well as the baseline Cassandra in any of the five experiments.
 
+\begin{figure*}[t]
+\centering
+\includegraphics[scale=0.5]{images/150GB_Reads.pdf}
+\vspace{-15pt}
+\caption{The experimental results of performing the 100\% read workload on the 150GB database.}
+\label{fig:150g_reads}
+\end{figure*}
+
 The results of the 150GB experiment are shown in Figure Y. Even with 100 parallel clients sending queries to the database, the node servers CPU usage and memory usage was still quite low. It seems that hard-disk accesses are the major bottleneck, which we have not accounted for in our method. The Cassandra read-digest~\cite{http://wiki.apache.org/cassandra/DigestQueries} also accounts for the slow performance, as even though you may read the data from the lowest resource usage server, you still need to access the other two servers in order to get the hash value and timestamp for the data.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[scale=0.5]{images/10GB_Scans.pdf}
+\vspace{-15pt}
+\caption{The experimental results of performing the 100\% scan workload on the 10GB database.}
+\label{fig:10g_scans}
+\end{figure*}
 
 We only ran the scan workload with 10GB of data. As the performance of the scheduler when performing scans was no better than the performance without then it is clear that the scans do not work. The primary difference between scans and reads is that the scan does not perform a read digest, thus removing the need to call every server to retrieve the value for a single key.
 
 The results of the 10GB experiment are shown in Figure Z.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[scale=0.5]{images/10GB_Scans_Stressed.pdf}
+\vspace{-15pt}
+\caption{The experimental results of performing the 100\% scan workload on the 10GB database (where every second node is stressed).}
+\label{fig:10g_scans_stressed}
+\end{figure*}
 
 We also ran the scans workload while introducing artificial workload into the server. This is a fairly contrived case, but is the ideal case for our work. The results of the 5 and 10 client experiments are shown in Figure A. In these cases you can see that the resource aware assignment has much better performance than the baseline Cassandra. This is because the resource aware assignment will consider that every second server is overloaded. The figures for the cases with 20, 50 and 100 clients are not shown because performing experiment on the baseline version of Cassandra resulted in the Cassandra code continually crashing.
 
