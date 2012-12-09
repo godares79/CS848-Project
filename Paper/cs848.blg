@@ -1,71 +1,28 @@
-This is BibTeX, Version 0.99d (TeX Live 2011)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: cs848.aux
-White space in argument---line 24 of file cs848.aux
- : \citation{Gray
- :                and Black Box}
-I'm skipping whatever remains of this command
+This is BibTeX, Version 0.99cThe top-level auxiliary file: cs848.aux
 The style file: abbrv.bst
 Database file #1: refs.bib
-I was expecting a `,' or a `}'---line 319 of file refs.bib
+I was expecting a `,' or a `}'---line 316 of file refs.bib
  : 
  : title = "Disk IO Tuning in AIX 6.1",
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--entry type for "MIT-Relational" isn't style-file defined
---line 332 of file refs.bib
+--line 329 of file refs.bib
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1049 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1049 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1049 of file abbrv.bst
+Warning--to sort, need author, organization, or key in IBM-IO
+Warning--empty title in IBM-IO
 Warning--empty booktitle in DataStaxCassandra
+Warning--empty journal in murphyVMWare
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1090 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1090 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1090 of file abbrv.bst
-You've used 13 entries,
-            2118 wiz_defined-function locations,
-            578 strings with 6603 characters,
-and the built_in function-call counts, 5123 in all, are:
-= -- 467
-> -- 348
-< -- 2
-+ -- 141
-- -- 126
-* -- 404
-:= -- 875
-add.period$ -- 39
-call.type$ -- 13
-change.case$ -- 101
-chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 158
-empty$ -- 341
-format.name$ -- 126
-if$ -- 1029
-int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 9
-newline$ -- 67
-num.names$ -- 26
-pop$ -- 117
-preamble$ -- 1
-purify$ -- 89
-quote$ -- 0
-skip$ -- 115
-stack$ -- 0
-substring$ -- 219
-swap$ -- 33
-text.length$ -- 2
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 52
-warning$ -- 1
-while$ -- 41
-width$ -- 15
-write$ -- 139
-(There were 8 error messages)
+Warning--empty school in Zilio:1998:PDD:928651
+(There were 7 error messages)

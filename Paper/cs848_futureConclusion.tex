@@ -49,6 +49,19 @@ The different server performance parameters are of different importance level. F
 \end{itemize}
 
 \subsection{Limitations}
+    	Our system shows better performance through the experiments; however it was not great as what we had expected. Through carefully analysis, we found that our experiment is limited by the following.
+
+\paragraph{Limited test environment}
+As mention, we only have ten servers in our experiment, this limits the replica allocation. Although those servers are crossing different machines; but the distance between machines are short, which means that the latency between servers is minimal. In reality, there are average 100,000 servers in real data center~\cite{Guo:2010:SDC:1921168.1921188}, and replication and backup processes may occur between data centers~\cite{F5-Accelerate}. In addition, normally every one mile in distance will add 8.2 microseconds latency to the performance, and this number does not consider package drop, delay in switch, and link size~\cite{Cisco-Latency}. This implies that one mile in distance between servers will have more delay than 8.2 microseconds. Replication between datacenters and large amount of servers will result in longer distance communication, and this is, we believe, the distance between servers is also a very important factor while performing workload partitioning.
+ 
+\paragraph{Simplistic workload}
+The queries, which we use for testing our system, are too simple. Even though we were focusing on heavy read operation, because reads are the most time consuming single key operation; however the CPU and memory consumption is still rare. This is because we are using the key-value store database, and such technique has optimization for reducing the resource usage as well as speed up the read performance. This is the reason why, our scheduling approach does not introduce significant performance to the original scheduling system.
+ 
+\paragraph{Unable to congest the network manually}
+Network congestion occurs when a link is carrying so much data that is greater than the capacity of the network – the number of packets a network can handle. This will cause queuing delay, packet loss, and high chance to be failure~\cite{103559}. However, we do not have this issue in our experiment, because our severs are in local and the network is never congested. This eliminates the chance to test our system under this situation.
+ 
+\paragraph{Disk information wasn’t considered}
+    	Many researchers point out that the hard disk drive access times lagged behind processor improvements, and consequently, performance gap between processors and hard disk drives increases, I/O wait time increases as a percentage of processor utilization. As result, disk bottlenecks occur~\cite{IBM-IO, TMS-SSD}. This problem can partially solved by using large amount of memory, so as to avoid disk access for intermediate results; however main memory is not free and infinite. When there are large amount of multi-query workloads are trying to perform I/O operation, the memory will be filled up and again run into disk bottlenecks~\cite{Bouganim:1998:MSL:288627.288646}. This indicates that the disk seek time is crucial, but our experiment only focus on CPU time, which is always fast, and eventually our system result in closer performance to the baseline scheduling algorithm.
 
 \subsection{Future Work}
 
