@@ -63,31 +63,36 @@ The queries are generated dynamically conforming to a Zipfian distribution~\cite
 The performance is measured in terms of operations per second that are performed. This is the default method that YCSB provides to measure performance. The YCSB also offers the ability to set a target for the number of operations that should be performed per second (similar to deadlines on the queries). However, this method sets the same deadline for every query and is directly related to the throughput, so we have chosen to only examine throughput. Each experiment has been performed using 5, 10, 20, 50 and 100 parallel YCSB clients.
 
 \subsection{Experimental Results}
-The performance with and without the scheduler is compared in each graph; the dashed line is the performance of the baseline Cassandra and the solid line is the performance using our scheduler. The Cassandra cluster was restarted between every run. The results are averaged over 3 runs each.
+In this section, the performance with and without the scheduler is compared in each graph; the dashed line is the performance of the baseline Cassandra and the solid line is the performance using our scheduler. The Cassandra cluster was restarted between every run and the results are averaged over 3 runs each.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.5]{images/10GB_Reads.pdf}
+\includegraphics[scale=0.63]{images/10GB_Reads.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% read workload on the 10GB database.}
 \label{fig:10g_reads}
 \end{figure*}
 
-The results of the 10GB experiment are shown in Figure X. As can be seen, the version of Cassandra using the resource based query assignment did not perform as well as the baseline Cassandra in any of the five experiments.
+The results of the 10GB experiment are shown in Figure~\ref{fig:10g_reads}. As can be seen, the version of Cassandra using the resource based query assignment did not perform as well as the baseline Cassandra in any of the five experiments. However, the difference in throughput between the scheduled and baseline versions tended to stay constant throughout the course of each experiment. As well, the ratio of the difference between experiments was very similar. This seems to indicate that the overhead of performing the additional assignment logic is what resulted in the decrease in performance. We also monitored the servers resource usage during the course of the experiment and found that the server was never heavily loaded, which means that the performance difference is very minor (i.e., there is no noticable difference between 10\% CPU usage and 12\% CPU usage).
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.5]{images/150GB_Reads.pdf}
+\includegraphics[scale=0.63]{images/150GB_Reads.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% read workload on the 150GB database.}
 \label{fig:150g_reads}
 \end{figure*}
 
-The results of the 150GB experiment are shown in Figure Y. Even with 100 parallel clients sending queries to the database, the node servers CPU usage and memory usage was still quite low. It seems that hard-disk accesses are the major bottleneck, which we have not accounted for in our method. The Cassandra read-digest~\cite{http://wiki.apache.org/cassandra/DigestQueries} also accounts for the slow performance, as even though you may read the data from the lowest resource usage server, you still need to access the other two servers in order to get the hash value and timestamp for the data.
+The results of the 150GB experiment are shown in Figure~\ref{fig:150g_reads}. Even with 100 parallel clients sending queries to the database, the node servers CPU usage and memory usage was still quite low. It seems that hard-disk accesses are the major bottleneck, which we have not accounted for in our method. The Cassandra read-digest~\cite{http://wiki.apache.org/cassandra/DigestQueries} also accounts for the slow performance, as even though you may read the data from the lowest resource usage server, you still need to access the other two servers in order to get the hash value and timestamp for the data.
+
+The introduced overhead of managing the hash table also seems to be at least partially responsible for the poor performance. In the baseline version, Cassandra does try to access the list of endpoints, and only sends the query to the first endpoint. In our version, we are not only traversing the list of valid replicas, but also swapping entries in that list (to sort it by resource usage). We are also storing the resource usage values in a Java HashMap, which starts to perform poorly when many threads are accessing it at one time (this is apparent from the extremely poor performance of the 100 client experiment).
+
+Because of the read digest, you still need to go to the poor performing servers to get a hash value. Running the experiment using scans shows that this is not always the case.
+
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.5]{images/10GB_Scans.pdf}
+\includegraphics[scale=0.63]{images/10GB_Scans.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% scan workload on the 10GB database.}
 \label{fig:10g_scans}
@@ -95,17 +100,17 @@ The results of the 150GB experiment are shown in Figure Y. Even with 100 paralle
 
 We only ran the scan workload with 10GB of data. As the performance of the scheduler when performing scans was no better than the performance without then it is clear that the scans do not work. The primary difference between scans and reads is that the scan does not perform a read digest, thus removing the need to call every server to retrieve the value for a single key.
 
-The results of the 10GB experiment are shown in Figure Z.
+The results of the 10GB experiment are shown in Figure~\ref{fig:10g_scans}.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.5]{images/10GB_Scans_Stressed.pdf}
+\includegraphics[scale=0.63]{images/10GB_Scans_Stressed.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% scan workload on the 10GB database (where every second node is stressed).}
 \label{fig:10g_scans_stressed}
 \end{figure*}
 
-We also ran the scans workload while introducing artificial workload into the server. This is a fairly contrived case, but is the ideal case for our work. The results of the 5 and 10 client experiments are shown in Figure A. In these cases you can see that the resource aware assignment has much better performance than the baseline Cassandra. This is because the resource aware assignment will consider that every second server is overloaded. The figures for the cases with 20, 50 and 100 clients are not shown because performing experiment on the baseline version of Cassandra resulted in the Cassandra code continually crashing.
+We also ran the scans workload while introducing artificial workload into the server. This is a fairly contrived case, but is the ideal case for our work. The results of the 5 and 10 client experiments are shown in Figure~\ref{fig:10g_scans_stressed}. In these cases you can see that the resource aware assignment has much better performance than the baseline Cassandra. This is because the resource aware assignment will consider that every second server is overloaded. The figures for the cases with 20, 50 and 100 clients are not shown because performing experiment on the baseline version of Cassandra resulted in the Cassandra code continually crashing.
 
 \section{Discussion}
 \todo{Need to fill in this with a small intro sentence}
