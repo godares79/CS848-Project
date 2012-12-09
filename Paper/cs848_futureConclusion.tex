@@ -4,6 +4,7 @@ As can be seen, our approach only provides a noticeable improvement to the perfo
 In the remainder of this section we will provide what we feel will be a more accurate resource usage formula for distributed databases, as well as discuss several limitations that may also have affected our work.
 
 \subsection{Re-examining the Resource Usage formula}
+\label{sec:examineResUse}
 
 \begin{figure}[t]
 \centering
@@ -22,6 +23,20 @@ The results from the experiment are shown in Figure~\ref{fig:resourceUsageFig}. 
 This experiment seems to indicate that the current formula is not ideal for determining the resource usage of the server. However, we believe that this could still work if the formula was changed to reflect how some variables affect the query execution time much more.  Additional variables can also be added that affect query execution time. For example, one of the primary bottlenecks in any database system is the hard disk, and we do not consider any variables related to the disk (e.g., disk access throughput).
 
 Something to note is that the heap memory of the Cassandra instance rarely exceeded 1GB. Meaning that the memory usage score had little effect during the normal experiments. Even when the server was being artificially loaded the heap memory therefore has little effect. This also means that little data is being cached, which increases the importance of measuring the disk load.
+
+\subsection{The New Resource Usage Formula}
+As Section~\ref{sec:examineResUse} shows, the resource usage score is far from ideal. We have some ideas on how to create a better resource usage formula. For reference, the current resource usage formula is:
+
+\begin{center}
+$ResourceUsage = \frac{1}{1-CPU} \times \frac{1}{1-Memory}$
+\end{center}
+
+The new resource usage formula is:
+\begin{center}
+$ResourceUsage = \frac{1}{1-CPU} \times j\left ( \frac{1}{1-Memory} \right ) \times k\left ( \frac{1}{1-Disk} \right ) \times \frac{1}{1-Distance}$
+\end{center}
+
+
 
 \subsection{Limitations}
 
