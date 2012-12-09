@@ -1,8 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{MIT-Relational}
-
-
 \bibitem{citeulike:6656195}
 D.~J. Abadi.
 \newblock {Data Management in the Cloud: Limitations and Opportunities}.
@@ -58,5 +55,9 @@ N.~W. Paton, M.~A.~T. Arag{\~{a}}o, K.~Lee, A.~A.~A. Fernandes, and
 \newblock {Optimizing Utility in Cloud Computing through Autonomic Workload
   Execution}.
 \newblock {\em IEEE Data Eng. Bull.}, 32(1):51--58, 2009.
+
+\bibitem{MIT-Relational}
+S.~Z. Y. J. E. C.~C. Wu, Eugene;~Madden.
+\newblock Relational cloud: The case for a database service, Mar 2010.
 
 \end{thebibliography}
