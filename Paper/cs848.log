@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  8 DEC 2012 22:51
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  9 DEC 2012 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -362,108 +362,106 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 30.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (10.14998pt too wide) in paragraph at lines 41--42
+(./cs848_introRelWork.tex
+Overfull \hbox (10.14998pt too wide) in paragraph at lines 3--4
 \T1/aer/m/n/9 ing sys-tems only sim-ply as-signed query to the clos-est replica
  [3],
  []
 
 
-Overfull \hbox (15.78226pt too wide) in paragraph at lines 49--50
+Overfull \hbox (15.78226pt too wide) in paragraph at lines 11--12
 \T1/aer/m/n/9 schemes. Works like graph par-ti-tion-ing al-go-rithms [8], workl
 oad-
  []
 
-[1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+) (./cs848_designAndImpl.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-
-LaTeX Warning: Citation `http://www.paperplanes.de/2011/12/9/the-magic-of-consi
-stent-hashing.html' on page \thepage  undefined on input line 63.
-
-
-LaTeX Warning: Citation `Quckly Generating Billion-Record Synthetic Databases' 
-on page \thepage  undefined on input line 71.
+])
+(./cs848_experiments.tex
+Overfull \hbox (2.52751pt too wide) in paragraph at lines 7--8
+\T1/aer/m/it/9 Par-ti-tioner \T1/aer/m/n/9 (equiv-a-lent to Con-sis-tent Hash P
+ar-ti-tion-ing [11]).
+ []
 
 <images/10GB_Reads.pdf, id=11, 794.97pt x 614.295pt>
 File: images/10GB_Reads.pdf Graphic file (type pdf)
 
 <use images/10GB_Reads.pdf>
-Package pdftex.def Info: images/10GB_Reads.pdf used on input line 80.
+Package pdftex.def Info: images/10GB_Reads.pdf used on input line 26.
 (pdftex.def)             Requested size: 447.56982pt x 345.8494pt.
 
 <images/150GB_Reads.pdf, id=12, 794.97pt x 614.295pt>
 File: images/150GB_Reads.pdf Graphic file (type pdf)
 
 <use images/150GB_Reads.pdf>
-Package pdftex.def Info: images/150GB_Reads.pdf used on input line 90.
+Package pdftex.def Info: images/150GB_Reads.pdf used on input line 36.
 (pdftex.def)             Requested size: 447.56982pt x 345.8494pt.
+ [2]
+Overfull \hbox (3.12152pt too wide) in paragraph at lines 48--49
+\T1/aer/m/n/9 bot-tle-neck in tra-di-tional databases as well). This means
+ []
 
-
-LaTeX Warning: Citation `http://wiki.apache.org/cassandra/DigestQueries' on pag
-e \thepage  undefined on input line 96.
-
-[2] <images/10GB_Scans.pdf, id=18, 794.97pt x 614.295pt>
+<images/10GB_Scans.pdf, id=17, 794.97pt x 614.295pt>
 File: images/10GB_Scans.pdf Graphic file (type pdf)
 
 <use images/10GB_Scans.pdf>
-Package pdftex.def Info: images/10GB_Scans.pdf used on input line 107.
+Package pdftex.def Info: images/10GB_Scans.pdf used on input line 62.
 (pdftex.def)             Requested size: 397.48402pt x 307.14674pt.
+ [3 <./images/10GB_Reads.pdf, page is rotated 90 degrees>] <images/10GB_Scans_S
+tressed.png, id=27, 584.1825pt x 791.95876pt>
+File: images/10GB_Scans_Stressed.png Graphic file (type png)
 
-<images/10GB_Scans_Stressed.pdf, id=19, 794.97pt x 614.295pt>
-File: images/10GB_Scans_Stressed.pdf Graphic file (type pdf)
-
-<use images/10GB_Scans_Stressed.pdf>
-Package pdftex.def Info: images/10GB_Scans_Stressed.pdf used on input line 118.
-
-(pdftex.def)             Requested size: 397.48402pt x 307.14674pt.
-
-Overfull \hbox (2.23016pt too wide) in paragraph at lines 129--129
+<use images/10GB_Scans_Stressed.png>
+Package pdftex.def Info: images/10GB_Scans_Stressed.png used on input line 74.
+(pdftex.def)             Requested size: 233.66885pt x 316.7779pt.
+) (./cs848_futureConclusion.tex [4 <./images/150GB_Reads.pdf, page is rotated 9
+0 degrees>]
+Overfull \hbox (2.23016pt too wide) in paragraph at lines 6--6
 []\secfnt Re-examining the Re-source Us-age for-mula 
  []
 
+<images/ResUse.pdf, id=38, 794.97pt x 614.295pt>
+File: images/ResUse.pdf Graphic file (type pdf)
+ <use images/ResUse.pdf>
+Package pdftex.def Info: images/ResUse.pdf used on input line 10.
+(pdftex.def)             Requested size: 238.49284pt x 184.28992pt.
 
-LaTeX Warning: Citation `Gray and Black Box' on page \thepage  undefined on inp
-ut line 130.
-
-
-Overfull \hbox (4.28204pt too wide) in paragraph at lines 134--135
+Overfull \hbox (4.28204pt too wide) in paragraph at lines 18--19
 []\T1/aer/m/n/9 The CPU us-age and mem-ory us-age was recorded ev-ery 250ms,
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [3 <./images/10GB_Reads.pdf, page is rotated 90 degrees>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./cs848.bbl [4 <./images/150GB_Reads.pdf, page is rotated 90 degrees>])
-[5
-
- <./images/10GB_Scans.pdf, page is rotated 90 degrees>] [6 <./images/10GB_Scans
-_Stressed.pdf, page is rotated 90 degrees>] (./cs848.aux) ) 
+ [5 <./images/10GB_Scans.pdf, page is rotated 90 degrees>]) (./cs848.bbl) [6 <.
+/images/10GB_Scans_Stressed.png> <./images/ResUse.pdf, page is rotated 90 degre
+es>]
+(./cs848.aux) ) 
 Here is how much of TeX's memory you used:
- 4716 strings out of 493633
- 63341 string characters out of 3143378
- 135140 words of memory out of 3000000
- 7910 multiletter control sequences out of 15000+200000
- 42626 words of font info for 61 fonts, out of 3000000 for 9000
+ 4742 strings out of 493633
+ 63707 string characters out of 3143378
+ 135160 words of memory out of 3000000
+ 7921 multiletter control sequences out of 15000+200000
+ 44129 words of font info for 62 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 41i,9n,35p,1375b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/
-2011/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2011/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2011/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2011/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2011/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2011/texmf-dist/fonts/ty
-pe1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw
-/helvetic/uhvr8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/
-utmb8a.pfb>
-Output written on cs848.pdf (6 pages, 152623 bytes).
+ 41i,9n,35p,1402b,242s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/base/8r.enc}
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
+r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/l
+ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/loc
+al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texliv
+e/2011/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2011/
+texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+Output written on cs848.pdf (6 pages, 232399 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 81 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

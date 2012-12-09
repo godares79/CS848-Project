@@ -1,11 +1,7 @@
 This is BibTeX, Version 0.99d (TeX Live 2011)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cs848.aux
-White space in argument---line 15 of file cs848.aux
- : \citation{Quckly
- :                  Generating Billion-Record Synthetic Databases}
-I'm skipping whatever remains of this command
-White space in argument---line 22 of file cs848.aux
+White space in argument---line 24 of file cs848.aux
  : \citation{Gray
  :                and Black Box}
 I'm skipping whatever remains of this command
@@ -18,8 +14,6 @@ I was expecting a `,' or a `}'---line 319 of file refs.bib
 I'm skipping whatever remains of this entry
 Warning--entry type for "MIT-Relational" isn't style-file defined
 --line 332 of file refs.bib
-Warning--I didn't find a database entry for "http://www.paperplanes.de/2011/12/9/the-magic-of-consistent-hashing.html"
-Warning--I didn't find a database entry for "http://wiki.apache.org/cassandra/DigestQueries"
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1049 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
@@ -33,45 +27,45 @@ Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Ev
 while executing---line 1090 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1090 of file abbrv.bst
-You've used 10 entries,
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            565 strings with 6293 characters,
-and the built_in function-call counts, 4285 in all, are:
-= -- 388
-> -- 306
+            578 strings with 6603 characters,
+and the built_in function-call counts, 5123 in all, are:
+= -- 467
+> -- 348
 < -- 2
-+ -- 123
-- -- 112
-* -- 353
-:= -- 734
-add.period$ -- 30
-call.type$ -- 10
-change.case$ -- 85
++ -- 141
+- -- 126
+* -- 404
+:= -- 875
+add.period$ -- 39
+call.type$ -- 13
+change.case$ -- 101
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 133
-empty$ -- 270
-format.name$ -- 112
-if$ -- 856
+cite$ -- 14
+duplicate$ -- 158
+empty$ -- 341
+format.name$ -- 126
+if$ -- 1029
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 8
-newline$ -- 52
-num.names$ -- 20
-pop$ -- 95
+int.to.str$ -- 13
+missing$ -- 9
+newline$ -- 67
+num.names$ -- 26
+pop$ -- 117
 preamble$ -- 1
-purify$ -- 76
+purify$ -- 89
 quote$ -- 0
-skip$ -- 92
+skip$ -- 115
 stack$ -- 0
-substring$ -- 178
-swap$ -- 30
+substring$ -- 219
+swap$ -- 33
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 40
+type$ -- 52
 warning$ -- 1
-while$ -- 33
-width$ -- 12
-write$ -- 110
-(There were 9 error messages)
+while$ -- 41
+width$ -- 15
+write$ -- 139
+(There were 8 error messages)

@@ -20,6 +20,11 @@ D.~Borthakur.
 \newblock {\em {The Hadoop Distributed File System: Architecture and Design}}.
 \newblock The Apache Software Foundation, 2007.
 
+\bibitem{readDigest}
+A.~Cassandra.
+\newblock Digestqueries.
+\newblock http://wiki.apache.org/cassandra/DigestQueries.
+
 \bibitem{Cooper:2010:BCS:1807128.1807152}
 B.~F. Cooper, A.~Silberstein, E.~Tam, R.~Ramakrishnan, and R.~Sears.
 \newblock Benchmarking cloud serving systems with ycsb.
@@ -44,10 +49,21 @@ A.~Ganapathi, Y.~Chen, A.~Fox, R.~Katz, and D.~Patterson.
 \newblock In {\em Data Engineering Workshops (ICDEW), 2010 IEEE 26th
   International Conference on}, pages 87 --92, march 2010.
 
+\bibitem{Gray:1994:QGB:191843.191886}
+J.~Gray, P.~Sundaresan, S.~Englert, K.~Baclawski, and P.~J. Weinberger.
+\newblock Quickly generating billion-record synthetic databases.
+\newblock {\em SIGMOD Rec.}, 23(2):243--252, May 1994.
+
 \bibitem{Lakshman:2010:CDS:1773912.1773922}
 A.~Lakshman and P.~Malik.
 \newblock Cassandra: a decentralized structured storage system.
 \newblock {\em SIGOPS Oper. Syst. Rev.}, 44(2):35--40, Apr. 2010.
+
+\bibitem{consistentHashPartitioning}
+M.~Meyer.
+\newblock The simple magic of consistent hashing.
+\newblock
+  http://www.paperplanes.de/2011/12/9/the-magic-of-consistent-hashing.html.
 
 \bibitem{citeulike:6656217}
 N.~W. Paton, M.~A.~T. Arag{\~{a}}o, K.~Lee, A.~A.~A. Fernandes, and
