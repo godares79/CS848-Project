@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{Cooper:2010:BCS:1807128.1807152}
+B.~F. Cooper, A.~Silberstein, E.~Tam, R.~Ramakrishnan, and R.~Sears.
+\newblock Benchmarking cloud serving systems with ycsb.
+\newblock In {\em Proceedings of the 1st ACM symposium on Cloud computing},
+  SoCC '10, pages 143--154, New York, NY, USA, 2010. ACM.
+
+\bibitem{DataStaxCassandra}
+J.~Ellis.
+\newblock Apache cassandra.
+\newblock Slideshare, 2011.
+
+\bibitem{Lakshman:2010:CDS:1773912.1773922}
+A.~Lakshman and P.~Malik.
+\newblock Cassandra: a decentralized structured storage system.
+\newblock {\em SIGOPS Oper. Syst. Rev.}, 44(2):35--40, Apr. 2010.
+
+\end{thebibliography}

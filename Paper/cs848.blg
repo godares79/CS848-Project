@@ -1,0 +1,34 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: cs848.aux
+The style file: abbrv.bst
+Database file #1: refs.bib
+I was expecting a `,' or a `}'---line 298 of file refs.bib
+ : author={Alan 
+ :              Murphy},
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 311 of file refs.bib
+ : 
+ : title = "Design Best Practices for Latency Optimization",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 315 of file refs.bib
+ : 
+ : title = "Increase Application Performance with Solid State Disks",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 319 of file refs.bib
+ : 
+ : title = "Disk IO Tuning in AIX 6.1",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 326 of file refs.bib
+ : 
+ : title = "Accelerating Data Replication with F5 WANJet and EMC MirrorView/Asynchronous",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 333 of file refs.bib
+ : 
+ : author = "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty booktitle in DataStaxCassandra
+(There were 6 error messages)
