@@ -36,7 +36,17 @@ The new resource usage formula is:
 $ResourceUsage = \frac{1}{1-CPU} \times j\left ( \frac{1}{1-Memory} \right ) \times k\left ( \frac{1}{1-Disk} \right ) \times \frac{1}{1-Distance}$
 \end{center}
 
+This is our proposed new equation that we think might be more representative of the machine condition and would work better as a reference for assigning jobs. As what can be seen, the \textit{CPU usage} and \textit{Memory Usage} part are still there in the equation. What is added is the \textit{Disk}, \textit{Distance} and some constant parameters. This equation is just a representation of our idea. It isn't necessarily the accurate form. To affirm the validity and the better performance of this new equation, more experiments are needed. 
 
+\begin{itemize}
+\item{\textit{Disk}}\\
+\textit{Disk} refers to the disk performance of the machine. This value will be related to the static disk mechanical nature, like average disk access time and data transfer rate. It will also be related to the disk usage condition by all programs on the machine. The slower the disk is by nature, the busier the disk is being used by the programs, the higher the value of \textit{Disk} will be. 
+\item{Distance}\\
+\textit{Distance} is referring to the distance between the node servers and the network conditions. This value will be determined by both the physical network ability, like the bandwidth, and the network conditions, like network congestions. This parameter is very important to affect the execution time. If  
+\item{Parameters \textit{i,j}}\\
+The different server performance parameters are of different importance level. For example, from what we observed during the experiments, we find that Memory Usage has little influence on the query execution time while \textit{disk usage} affects the execution time a lot. This importance level is adjusted by the constant coefficients, like \textit{j} and \textit{k} in the equations. \textit{memory} is less important so \textit{j} should probably be less than 1 and \textit{disk} is very important so \textit{k} is probably bigger than 1. The exact value of these parameters will need further experiments. 
+
+\end{itemize}
 
 \subsection{Limitations}
 
