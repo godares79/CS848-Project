@@ -1,4 +1,27 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{MIT-Relational}
+
+
+\bibitem{citeulike:6656195}
+D.~J. Abadi.
+\newblock {Data Management in the Cloud: Limitations and Opportunities}.
+\newblock {\em IEEE Data Eng. Bull.}, 32(1):3--12, 2009.
+
+\bibitem{Agrawal:2008:CRD:1462571.1462573}
+R.~Agrawal, A.~Ailamaki, P.~A. Bernstein, E.~A. Brewer, M.~J. Carey,
+  S.~Chaudhuri, A.~Doan, D.~Florescu, M.~J. Franklin, H.~Garcia-Molina,
+  J.~Gehrke, L.~Gruenwald, L.~M. Haas, A.~Y. Halevy, J.~M. Hellerstein, Y.~E.
+  Ioannidis, H.~F. Korth, D.~Kossmann, S.~Madden, R.~Magoulas, B.~C. Ooi,
+  T.~O'Reilly, R.~Ramakrishnan, S.~Sarawagi, M.~Stonebraker, A.~S. Szalay, and
+  G.~Weikum.
+\newblock The claremont report on database research.
+\newblock {\em SIGMOD Rec.}, 37(3):9--19, Sept. 2008.
+
+\bibitem{borthakur-07}
+D.~Borthakur.
+\newblock {\em {The Hadoop Distributed File System: Architecture and Design}}.
+\newblock The Apache Software Foundation, 2007.
 
 \bibitem{Cooper:2010:BCS:1807128.1807152}
 B.~F. Cooper, A.~Silberstein, E.~Tam, R.~Ramakrishnan, and R.~Sears.
@@ -6,14 +29,34 @@ B.~F. Cooper, A.~Silberstein, E.~Tam, R.~Ramakrishnan, and R.~Sears.
 \newblock In {\em Proceedings of the 1st ACM symposium on Cloud computing},
   SoCC '10, pages 143--154, New York, NY, USA, 2010. ACM.
 
+\bibitem{curino2011relational}
+C.~Curino, E.~Jones, R.~A. Popa, N.~Malviya, E.~Wu, S.~Madden, H.~Balakrishnan,
+  and N.~Zeldovich.
+\newblock {Relational Cloud: A Database Service for the Cloud}.
+\newblock In {\em 5th Biennial Conference on Innovative Data Systems Research},
+  Asilomar, CA, January 2011.
+
 \bibitem{DataStaxCassandra}
 J.~Ellis.
 \newblock Apache cassandra.
 \newblock Slideshare, 2011.
 
+\bibitem{5452742}
+A.~Ganapathi, Y.~Chen, A.~Fox, R.~Katz, and D.~Patterson.
+\newblock Statistics-driven workload modeling for the cloud.
+\newblock In {\em Data Engineering Workshops (ICDEW), 2010 IEEE 26th
+  International Conference on}, pages 87 --92, march 2010.
+
 \bibitem{Lakshman:2010:CDS:1773912.1773922}
 A.~Lakshman and P.~Malik.
 \newblock Cassandra: a decentralized structured storage system.
 \newblock {\em SIGOPS Oper. Syst. Rev.}, 44(2):35--40, Apr. 2010.
+
+\bibitem{citeulike:6656217}
+N.~W. Paton, M.~A.~T. Arag{\~{a}}o, K.~Lee, A.~A.~A. Fernandes, and
+  R.~Sakellariou.
+\newblock {Optimizing Utility in Cloud Computing through Autonomic Workload
+  Execution}.
+\newblock {\em IEEE Data Eng. Bull.}, 32(1):51--58, 2009.
 
 \end{thebibliography}

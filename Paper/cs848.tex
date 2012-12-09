@@ -38,7 +38,17 @@ Place abstract here
 
 \section{Introduction}
 
+Recently, the cloud has attracted a lot of attention from both the scientific research community and practitioners as it enables executing long running resource intensive tasks on the cloud using as many nodes as required thus greatly reducing the task completion time and eliminating the need to procure expensive server grade hardware~\cite{Agrawal:2008:CRD:1462571.1462573}. However, the performance of cloud compute nodes is often not consistent, with some nodes obtaining orders of magnitude worse performance than other nodes. There are a variety of reasons a node could suffer from degraded performance, ranging from extremely heavy workload (i.e., the node is a hotspot), to partial hardware failure~\cite{citeulike:6656195}. However, the modern scheduling systems only simply assigned query to the closest replica~\cite{borthakur-07}, without taking heterogeneous hardware into account. This eventually limits communication between servers, and making congestion and computation hot-spots prevalent even when spare capacity is available elsewhere.
+
+
 \section{Related Work}
+
+
+To work around this problem, many researchers focus on estimating workload resource usage in order to maximal performance while minimizing the cost of resources used~\cite{citeulike:6656217,5452742,curino2011relational, MIT-Relational}. This predict job execution time and resource requirements technique can help cloud provider to make decision about which requests from which users are to be executed on which computational resources, and when [4]. Many researchers had built workload placement recommendation service base on workload demand patterns [20,21], and such approach can result in 35\% reduction in processor usage [20]. Differ to our study, our system do not take workload requirement perdition into account, because we believe that execute workload analysis for every query will result in some latency issues. Instead, our system focuses on dynamically forwarding workload to the idlest server, in order to prevent hotspot.
+ 
+Furthermore, some other researchers focus on partitioning schemes. Works like graph partitioning algorithms [8], workload-aware partitioning [9], and classical work on physical design and partitioning [10] are focusing on dividing data into partitions that maximize transaction/query performance to allow workloads to scale across multiple computing nodes. However, graph partitioning is NP-hard problems, and solutions to this problem are generally derived using heuristics and approximation algorithms [22], and we believe that this will introduce execution complexity, and the performance is vary to different databases. Next, the workload-aware partitioning focus on partition tables base on workload prediction [9, 23]; however, there are many workloads, a ﬁnite number can be hosted by each server, and each workload has capacity requirements that may frequently change based on business needs [20], this means that workload-aware partitioning needs to be dynamic rather than static; however dynamic workload-aware partitioning will reduce performance dramatically. Last, some other works on physical design and partitioning allows database loaded into the system by both static decision and dynamic decision in order to increase I/O bandwidth [10]. This approach is pragmatic, but if we only rely on partitioning database the performance will be limited.
+ 
+Virtual machine (VM) migration is also another approach for load balancing. VM migration focuses on the transfer of a VM from one physical machine to another with little or no service downtime (e.g. live VM migration) when the server that the VM sits on becomes overloaded with processes, traffic, or memory usage [11]. Nevertheless, the challenges with long distance live migration are the WAN bandwidth, latency, and packet loss limitations that are outside the control of most IT organizations. Many applications are susceptible to network issues across the WAN that can be exacerbated by distance and network quality [25], in addition, traditional VM migration will cause network traffic and bandwidth consumption, and many VM migration researcher are struggling in mitigating those causes [24].
 
 \section{Design}
 
@@ -63,54 +73,55 @@ The queries are generated dynamically conforming to a Zipfian distribution~\cite
 The performance is measured in terms of operations per second that are performed. This is the default method that YCSB provides to measure performance. The YCSB also offers the ability to set a target for the number of operations that should be performed per second (similar to deadlines on the queries). However, this method sets the same deadline for every query and is directly related to the throughput, so we have chosen to only examine throughput. Each experiment has been performed using 5, 10, 20, 50 and 100 parallel YCSB clients.
 
 \subsection{Experimental Results}
-In this section, the performance with and without the scheduler is compared in each graph; the dashed line is the performance of the baseline Cassandra and the solid line is the performance using our scheduler. The Cassandra cluster was restarted between every run and the results are averaged over 3 runs each.
+TIn this section, the performance with and without the scheduler is compared in each graph; the dashed line is the performance of the baseline Cassandra and the solid line is the performance using our scheduler. The Cassandra cluster was restarted b and tetween every run. The results are averaged over 3 runs each.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.63]{images/10GB_Reads.pdf}
+\includegraphics[scale=0.563]{images/10GB_Reads.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% read workload on the 10GB database.}
 \label{fig:10g_reads}
 \end{figure*}
 
-The results of the 10GB experiment are shown in Figure~\ref{fig:10g_reads}. As can be seen, the version of Cassandra using the resource based query assignment did not perform as well as the baseline Cassandra in any of the five experiments. However, the difference in throughput between the scheduled and baseline versions tended to stay constant throughout the course of each experiment. As well, the ratio of the difference between experiments was very similar. This seems to indicate that the overhead of performing the additional assignment logic is what resulted in the decrease in performance. We also monitored the servers resource usage during the course of the experiment and found that the server was never heavily loaded, which means that the performance difference is very minor (i.e., there is no noticable difference between 10\% CPU usage and 12\% CPU usage).
+The results of the 10GB experiment are shown in Figure X~\ref{fig:10g_reads}. As can be seen, the version of Cassandra using the resource based query assignment did n However, the difference in throughput between the scheduled and baseline versions tended to stay constant throughout the course of each experiment. As well, the ratio of the difference between experiments was very similar. This seems to indicate that the overhead of performing the additional assignment logic is what resulted in the decrease in performance. We also monitored the servers resource usage during the course of the experiment and found that the server was never heavily loaded, which means that the performance difference is very minor (i.e., there is no noticable difference between 10\% CPU usage and 12\% CPU usage).ot perform as well as the baseline Cassandra in any of the five experiments.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.63]{images/150GB_Reads.pdf}
+\includegraphics[scale=0.563]{images/150GB_Reads.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% read workload on the 150GB database.}
 \label{fig:150g_reads}
 \end{figure*}
 
-The results of the 150GB experiment are shown in Figure~\ref{fig:150g_reads}. Even with 100 parallel clients sending queries to the database, the node servers CPU usage and memory usage was still quite low. It seems that hard-disk accesses are the major bottleneck, which we have not accounted for in our method. The Cassandra read-digest~\cite{http://wiki.apache.org/cassandra/DigestQueries} also accounts for the slow performance, as even though you may read the data from the lowest resource usage server, you still need to access the other two servers in order to get the hash value and timestamp for the data.
+The results of the 150GB experiment are shown in Figure Y~\ref{fig:150g_reads}. Even with 100 parallel clients sending queries to the database, the node servers CPU usage and memory usage was still quite low. It seems that hard-disk accesses are the major bottleneck, which we have not accounted for in our method. The Cassandra read-digest~\cite{http://wiki.apache.org/cassandra/DigestQueries} also accounts for the slow performance, as even though you may read the data from the lowest resource usage server, you still need to access the other two servers in order to get the hash value and timestamp for the data.
 
 The introduced overhead of managing the hash table also seems to be at least partially responsible for the poor performance. In the baseline version, Cassandra does try to access the list of endpoints, and only sends the query to the first endpoint. In our version, we are not only traversing the list of valid replicas, but also swapping entries in that list (to sort it by resource usage). We are also storing the resource usage values in a Java HashMap, which starts to perform poorly when many threads are accessing it at one time (this is apparent from the extremely poor performance of the 100 client experiment).
+
+
 
 Because of the read digest, you still need to go to the poor performing servers to get a hash value. Running the experiment using scans shows that this is not always the case.
 
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.63]{images/10GB_Scans.pdf}
+\includegraphics[scale=0.5]{images/10GB_Scans.pdf}
 \vspace{-15pt}
 \caption{The experimental results of performing the 100\% scan workload on the 10GB database.}
-\label{fig:10g_scans}
+\label{fig:10g_scans}                                   ~\ref{fig:10g_scans}
 \end{figure*}
 
 We only ran the scan workload with 10GB of data. As the performance of the scheduler when performing scans was no better than the performance without then it is clear that the scans do not work. The primary difference between scans and reads is that the scan does not perform a read digest, thus removing the need to call every server to retrieve the value for a single key.
-
-The results of the 10GB experiment are shown in Figure~\ref{fig:10g_scans}.
+The results of the 10GB experiment are shown in Figure Z.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[scale=0.63]{images/10GB_Scans_Stressed.pdf}
-\vspace{-15pt}
+\includegraphics[scale=0.5]{images/10GB_Scans_Stressed.pdf}
+\vspace{-15pt}                                                                                                                                                                                                                 ~\ref{fig:10g_scans_stressed}
 \caption{The experimental results of performing the 100\% scan workload on the 10GB database (where every second node is stressed).}
 \label{fig:10g_scans_stressed}
 \end{figure*}
 
-We also ran the scans workload while introducing artificial workload into the server. This is a fairly contrived case, but is the ideal case for our work. The results of the 5 and 10 client experiments are shown in Figure~\ref{fig:10g_scans_stressed}. In these cases you can see that the resource aware assignment has much better performance than the baseline Cassandra. This is because the resource aware assignment will consider that every second server is overloaded. The figures for the cases with 20, 50 and 100 clients are not shown because performing experiment on the baseline version of Cassandra resulted in the Cassandra code continually crashing.
+We also ran the scans workload while introducing artificial workload into the server. This is a fairly contrived case, but is the ideal case for our work. The results of the 5 and 10 client experiments are shown in Figure A. In these cases you can see that the resource aware assignment has much better performance than the baseline Cassandra. This is because the resource aware assignment will consider that every second server is overloaded. The figures for the cases with 20, 50 and 100 clients are not shown because performing experiment on the baseline version of Cassandra resulted in the Cassandra code continually crashing.
 
 \section{Discussion}
 \todo{Need to fill in this with a small intro sentence}
