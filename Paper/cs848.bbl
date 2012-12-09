@@ -1,5 +1,8 @@
 \begin{thebibliography}{10}
 
+\bibitem{IBM-IO}
+
+
 \bibitem{citeulike:6656195}
 D.~J. Abadi.
 \newblock {Data Management in the Cloud: Limitations and Opportunities}.
@@ -15,21 +18,53 @@ R.~Agrawal, A.~Ailamaki, P.~A. Bernstein, E.~A. Brewer, M.~J. Carey,
 \newblock The claremont report on database research.
 \newblock {\em SIGMOD Rec.}, 37(3):9--19, Sept. 2008.
 
+\bibitem{Atikoglu:2012:WAL:2254756.2254766}
+B.~Atikoglu, Y.~Xu, E.~Frachtenberg, S.~Jiang, and M.~Paleczny.
+\newblock Workload analysis of a large-scale key-value store.
+\newblock In {\em Proceedings of the 12th ACM SIGMETRICS/PERFORMANCE joint
+  international conference on Measurement and Modeling of Computer Systems},
+  SIGMETRICS '12, pages 53--64, New York, NY, USA, 2012. ACM.
+
 \bibitem{borthakur-07}
 D.~Borthakur.
 \newblock {\em {The Hadoop Distributed File System: Architecture and Design}}.
 \newblock The Apache Software Foundation, 2007.
+
+\bibitem{Bouganim:1998:MSL:288627.288646}
+L.~Bouganim, O.~Kapitskaia, and P.~Valduriez.
+\newblock Memory-adaptive scheduling for large query execution.
+\newblock In {\em Proceedings of the seventh international conference on
+  Information and knowledge management}, CIKM '98, pages 105--115, New York,
+  NY, USA, 1998. ACM.
+
+\bibitem{F5-Accelerate}
+C.~Cano.
+\newblock {\em Accelerating Data Replication with F5 WANJet and EMC
+  MirrorView/Asynchronous}.
+\newblock F5 Networks, Inc., May 2008.
 
 \bibitem{readDigest}
 A.~Cassandra.
 \newblock Digestqueries.
 \newblock http://wiki.apache.org/cassandra/DigestQueries.
 
+\bibitem{Clark:2005:LMV:1251203.1251223}
+C.~Clark, K.~Fraser, S.~Hand, J.~G. Hansen, E.~Jul, C.~Limpach, I.~Pratt, and
+  A.~Warfield.
+\newblock Live migration of virtual machines.
+\newblock In {\em Proceedings of the 2nd conference on Symposium on Networked
+  Systems Design \& Implementation - Volume 2}, NSDI'05, pages 273--286,
+  Berkeley, CA, USA, 2005. USENIX Association.
+
 \bibitem{Cooper:2010:BCS:1807128.1807152}
 B.~F. Cooper, A.~Silberstein, E.~Tam, R.~Ramakrishnan, and R.~Sears.
 \newblock Benchmarking cloud serving systems with ycsb.
 \newblock In {\em Proceedings of the 1st ACM symposium on Cloud computing},
   SoCC '10, pages 143--154, New York, NY, USA, 2010. ACM.
+
+\bibitem{Cisco-Latency}
+Corporate Headquarters Cisco Systems, Inc.
+\newblock {\em Design Best Practices for Latency Optimization}.
 
 \bibitem{curino2011relational}
 C.~Curino, E.~Jones, R.~A. Popa, N.~Malviya, E.~Wu, S.~Madden, H.~Balakrishnan,
@@ -43,27 +78,75 @@ J.~Ellis.
 \newblock Apache cassandra.
 \newblock Slideshare, 2011.
 
+\bibitem{citeulike:11192678}
+A.~E. Feldmann and L.~Foschini.
+\newblock {Balanced Partitions of Trees and Applications}.
+\newblock In C.~D{\"{u}}rr, T.~Wilke, C.~D{\"{u}}rr, and T.~Wilke, editors,
+  {\em STACS}, volume~14 of {\em LIPIcs}, pages 100--111. Schloss Dagstuhl -
+  Leibniz-Zentrum fuer Informatik, 2012.
+
+\bibitem{103559}
+H.~Fowler and W.~Leland.
+\newblock Local area network characteristics, with implications for broadband
+  network congestion management.
+\newblock {\em Selected Areas in Communications, IEEE Journal on}, 9(7):1139
+  --1149, sep 1991.
+
 \bibitem{5452742}
 A.~Ganapathi, Y.~Chen, A.~Fox, R.~Katz, and D.~Patterson.
 \newblock Statistics-driven workload modeling for the cloud.
 \newblock In {\em Data Engineering Workshops (ICDEW), 2010 IEEE 26th
   International Conference on}, pages 87 --92, march 2010.
 
+\bibitem{Gmach:2007:WAD:1524302.1524818}
+D.~Gmach, J.~Rolia, L.~Cherkasova, and A.~Kemper.
+\newblock Workload analysis and demand prediction of enterprise data center
+  applications.
+\newblock In {\em Proceedings of the 2007 IEEE 10th International Symposium on
+  Workload Characterization}, IISWC '07, pages 171--180, Washington, DC, USA,
+  2007. IEEE Computer Society.
+
 \bibitem{Gray:1994:QGB:191843.191886}
 J.~Gray, P.~Sundaresan, S.~Englert, K.~Baclawski, and P.~J. Weinberger.
 \newblock Quickly generating billion-record synthetic databases.
 \newblock {\em SIGMOD Rec.}, 23(2):243--252, May 1994.
+
+\bibitem{Guo:2010:SDC:1921168.1921188}
+C.~Guo, G.~Lu, H.~J. Wang, S.~Yang, C.~Kong, P.~Sun, W.~Wu, and Y.~Zhang.
+\newblock Secondnet: a data center network virtualization architecture with
+  bandwidth guarantees.
+\newblock In {\em Proceedings of the 6th International COnference}, Co-NEXT
+  '10, pages 15:1--15:12, New York, NY, USA, 2010. ACM.
+
+\bibitem{Karypis:1998:FHQ:305219.305248}
+G.~Karypis and V.~Kumar.
+\newblock A fast and high quality multilevel scheme for partitioning irregular
+  graphs.
+\newblock {\em SIAM J. Sci. Comput.}, 20(1):359--392, Dec. 1998.
 
 \bibitem{Lakshman:2010:CDS:1773912.1773922}
 A.~Lakshman and P.~Malik.
 \newblock Cassandra: a decentralized structured storage system.
 \newblock {\em SIGOPS Oper. Syst. Rev.}, 44(2):35--40, Apr. 2010.
 
+\bibitem{Liu:2009:LMV:1551609.1551630}
+H.~Liu, H.~Jin, X.~Liao, L.~Hu, and C.~Yu.
+\newblock Live migration of virtual machine based on full system trace and
+  replay.
+\newblock In {\em Proceedings of the 18th ACM international symposium on High
+  performance distributed computing}, HPDC '09, pages 101--110, New York, NY,
+  USA, 2009. ACM.
+
 \bibitem{consistentHashPartitioning}
 M.~Meyer.
 \newblock The simple magic of consistent hashing.
 \newblock
   http://www.paperplanes.de/2011/12/9/the-magic-of-consistent-hashing.html.
+
+\bibitem{murphyVMWare}
+A.~Murphy.
+\newblock Enabling long distance live migration with f5 and vmware vmotion.
+\newblock pages 1139 --1149, sep 2012.
 
 \bibitem{citeulike:6656217}
 N.~W. Paton, M.~A.~T. Arag{\~{a}}o, K.~Lee, A.~A.~A. Fernandes, and
@@ -72,8 +155,32 @@ N.~W. Paton, M.~A.~T. Arag{\~{a}}o, K.~Lee, A.~A.~A. Fernandes, and
   Execution}.
 \newblock {\em IEEE Data Eng. Bull.}, 32(1):51--58, 2009.
 
+\bibitem{Scholl:2009:WDP:1516360.1516366}
+T.~Scholl, B.~Bauer, J.~M\"{u}ller, B.~Gufler, A.~Reiser, and A.~Kemper.
+\newblock Workload-aware data partitioning in community-driven data grids.
+\newblock In {\em Proceedings of the 12th International Conference on Extending
+  Database Technology: Advances in Database Technology}, EDBT '09, pages
+  36--47, New York, NY, USA, 2009. ACM.
+
+\bibitem{TMS-SSD}
+Texas Memory Systems, Inc.
+\newblock {\em Increase Application Performance with Solid State Disks}.
+
+\bibitem{Mit-Shinobi}
+S.~Wu, Eugene.
+\newblock Shinobi : insert-aware partitioning and indexing techniques for
+  skewed database workloads.
+\newblock Master's thesis, Massachusetts Institute of Technology, 2010.
+
 \bibitem{MIT-Relational}
 S.~Z. Y. J. E. C.~C. Wu, Eugene;~Madden.
 \newblock Relational cloud: The case for a database service, Mar 2010.
+
+\bibitem{Zilio:1998:PDD:928651}
+D.~C. Zilio.
+\newblock {\em Physical database design decision algorithms and concurrent
+  reorganization for parallel database systems}.
+\newblock PhD thesis, Toronto, Ont., Canada, Canada, 1998.
+\newblock AAINQ35386.
 
 \end{thebibliography}
