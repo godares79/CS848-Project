@@ -27,6 +27,7 @@ This experiment seems to indicate that the current formula is not ideal for dete
 Something to note is that the heap memory of the Cassandra instance rarely exceeded 1GB. Meaning that the memory usage score had little effect during the normal experiments. Even when the server was being artificially loaded the heap memory therefore has little effect. This also means that little data is being cached, which increases the importance of measuring the disk load.
 
 \subsection{The New Resource Usage Formula}
+\label{sec:usageFormula}
 As Section~\ref{sec:examineResUse} shows, the resource usage score is far from ideal. We have some ideas on how to create a better resource usage formula. For reference, the current resource usage formula is:
 
 \begin{center}
@@ -38,20 +39,21 @@ The new resource usage formula is:
 $ResourceUsage = \frac{1}{1-CPU} \times j\left ( \frac{1}{1-Memory} \right ) \times k\left ( \frac{1}{1-Disk} \right ) \times \frac{1}{1-Distance}$
 \end{center}
 
-This is our proposed new equation that we think might be more representative of the machine condition and would work better as a reference for assigning jobs. As what can be seen, the \textit{CPU usage} and \textit{Memory Usage} part are still there in the equation. What is added is the \textit{Disk}, \textit{Distance} and some constant parameters. This equation is just a representation of our idea. It isn't necessarily the accurate form. To affirm the validity and the better performance of this new equation, more experiments are needed. 
+This is our proposed new equation that we feel may be more representative of the machine condition and should work better as a reference for assigning jobs. As can be seen, the \textit{CPU usage} and \textit{Memory usage} are still in the equation. We have added parameters for \textit{Disk} usage, \textit{Distance} (network overhead) and two scaling parameters:
 
 \begin{itemize}
-\item{\textit{Disk}}\\
-\textit{Disk} refers to the disk performance of the machine. This value will be related to the static disk mechanical nature, like average disk access time and data transfer rate. It will also be related to the disk usage condition by all programs on the machine. The slower the disk is by nature, the busier the disk is being used by the programs, the higher the value of \textit{Disk} will be. 
-\item{Distance}\\
-\textit{Distance} is referring to the distance between the node servers and the network conditions. This value will be determined by both the physical network ability, like the bandwidth, and the network conditions, like network congestions. This parameter is very important to affect the execution time. If  
-\item{Parameters \textit{i,j}}\\
-The different server performance parameters are of different importance level. For example, from what we observed during the experiments, we find that Memory Usage has little influence on the query execution time while \textit{disk usage} affects the execution time a lot. This importance level is adjusted by the constant coefficients, like \textit{j} and \textit{k} in the equations. \textit{memory} is less important so \textit{j} should probably be less than 1 and \textit{disk} is very important so \textit{k} is probably bigger than 1. The exact value of these parameters will need further experiments. 
-
+\item{\textit{Disk}} \\
+\textit{Disk} refers to the hard disk performance of the machine. We feel this value should be related to values such as the average disk access time and data transfer rate. It will also be related to the disk usage condition by all programs on the machine. The slower the disk is by nature, and the busier the disk is being used by the programs, the higher the value of \textit{Disk} will be. 
+\item{Distance} \\
+\textit{Distance} is referring to the distance between the node servers and the network conditions. This value will be determined by both the physical network ability, like the total available bandwidth; and the network conditions, like current network usage. This parameter is very important in affecting affect the execution time when dealing with multiple datacenters.
+\item{Parameters \textit{k,j}} \\
+The different server performance parameters have a different magnitude of effect on the query execution time. For example, from what we observed during the experiments, memory usage has little influence on the query execution time while \textit{disk usage} affects the execution time a lot. This importance level is adjusted by the constant coefficients \textit{j} and \textit{k} in the equations. \textit{Memory} is less important so \textit{j} should probably be less than 1 and \textit{disk} is very important so \textit{k} is probably bigger than 1. The exact value of these parameters would need to be determined with further testing.
 \end{itemize}
 
+This equation is just a representation of our idea and isn't necessarily accurate. More experiments are needed to confirm that this equation leads to better performance. 
+
 \subsection{Limitations}
-Our system shows better performance through the experiments; however it was not great as what we had expected. Through carefully analysis, we found that our experiment is limited by the following.
+Our system only provides better performance in very limited cases. We believe that our experiment is limited due to the following reasons:
 
 \paragraph{Limited test environment}
 As mention, we only have ten servers in our experiment, this limits the replica allocation. Although those servers are crossing different machines; but the distance between machines are short, which means that the latency between servers is minimal. In reality, there are average 100,000 servers in real data center~\cite{Guo:2010:SDC:1921168.1921188}, and replication and backup processes may occur between data centers~\cite{F5-Accelerate}. In addition, normally every one mile in distance will add 8.2 microseconds latency to the performance, and this number does not consider package drop, delay in switch, and link size~\cite{Cisco-Latency}. This implies that one mile in distance between servers will have more delay than 8.2 microseconds. Replication between datacenters and large amount of servers will result in longer distance communication, and this is, we believe, the distance between servers is also a very important factor while performing workload partitioning.
@@ -62,11 +64,13 @@ The queries, which we use for testing our system, are too simple. Even though we
 \paragraph{Unable to congest the network manually}
 Network congestion occurs when a link is carrying so much data that is greater than the capacity of the network – the number of packets a network can handle. This will cause queuing delay, packet loss, and high chance to be failure~\cite{103559}. However, we do not have this issue in our experiment, because our severs are in local and the network is never congested. This eliminates the chance to test our system under this situation.
  
-\paragraph{Disk information wasn’t considered}
+\paragraph{Disk information was not considered}
 Many researchers point out that the hard disk drive access times lagged behind processor improvements, and consequently, performance gap between processors and hard disk drives increases, I/O wait time increases as a percentage of processor utilization. As result, disk bottlenecks occur~\cite{IBM-IO, TMS-SSD}. This problem can partially solved by using large amount of memory, so as to avoid disk access for intermediate results; however main memory is not free and infinite. When there are large amount of multi-query workloads are trying to perform I/O operation, the memory will be filled up and again run into disk bottlenecks~\cite{Bouganim:1998:MSL:288627.288646}. This indicates that the disk seek time is crucial, but our experiment only focus on CPU time, which is always fast, and eventually our system result in closer performance to the baseline job assignment algorithm.
 
 \subsection{Future Work}
+As mentioned above, we want to validate our proposed new resource usage formula (see Section~\ref{sec:usageFormula}) by running experiments on it. After determining a more accurate representation for the resource usage of a machine, the experiments could be redone to see if it leads to better performance. At the same time, we should continue to reduce the overhead of the query assignment algorithm as overhead is one of the key factors that affect the performance of the database.
 
+We would also like to test our new algorithm on other key-value databases (e.g., HBase) and other types of databases (e.g., distributed relational databases). In the case of relational databases, more complex queries could be used to see how the complexity of queries affect the performance.
 
 \section{Conclusion}
 \label{sec:conclusion}
