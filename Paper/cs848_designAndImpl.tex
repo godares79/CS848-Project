@@ -54,3 +54,13 @@ We should note that the CJD could have been implemented within Cassandra (as the
 
 \subsection{Reducing overhead}
 \label{sec:impl_overhead}
+
+With a single master server directing all queries it is critical that the performance of the query assigner remains high. Also, too much overhead at master server will affect the scalability of the database. Therefore, we took several steps to reduce the overhead at the master server:
+
+\begin{itemize}
+\item
+For sending information between the RM and the CJD, UDP is used instead of TCP.
+
+\item
+To reduce the number of inter-process calls Cassandra also maintains a hash table that stores the resource usage scores for the server. This table is updated once per second when the resource usage scores are updated on the CJD. We have taken steps to ensure that the hash table storing the resource usage information in Cassandra is never locked due to updates. 
+\end{itemize}
