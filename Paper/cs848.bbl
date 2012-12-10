@@ -1,8 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{IBM-IO}
-
-
 \bibitem{citeulike:6656195}
 D.~J. Abadi.
 \newblock {Data Management in the Cloud: Limitations and Opportunities}.
@@ -29,13 +26,6 @@ B.~Atikoglu, Y.~Xu, E.~Frachtenberg, S.~Jiang, and M.~Paleczny.
 D.~Borthakur.
 \newblock {\em {The Hadoop Distributed File System: Architecture and Design}}.
 \newblock The Apache Software Foundation, 2007.
-
-\bibitem{Bouganim:1998:MSL:288627.288646}
-L.~Bouganim, O.~Kapitskaia, and P.~Valduriez.
-\newblock Memory-adaptive scheduling for large query execution.
-\newblock In {\em Proceedings of the seventh international conference on
-  Information and knowledge management}, CIKM '98, pages 105--115, New York,
-  NY, USA, 1998. ACM.
 
 \bibitem{F5-Accelerate}
 C.~Cano.
@@ -165,10 +155,6 @@ T.~Scholl, B.~Bauer, J.~M\"{u}ller, B.~Gufler, A.~Reiser, and A.~Kemper.
 \newblock In {\em Proceedings of the 12th International Conference on Extending
   Database Technology: Advances in Database Technology}, EDBT '09, pages
   36--47, New York, NY, USA, 2009. ACM.
-
-\bibitem{TMS-SSD}
-Texas Memory Systems, Inc.
-\newblock {\em Increase Application Performance with Solid State Disks}.
 
 \bibitem{Wood:2007:BGS:1973430.1973447}
 T.~Wood, P.~Shenoy, A.~Venkataramani, and M.~Yousif.

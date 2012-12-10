@@ -33,7 +33,7 @@
 % http://tex.stackexchange.com/questions/138/what-are-underfull-hboxes-and-vboxes-and-how-can-i-get-rid-of-them
 
 \begin{abstract}
-Distributed database is blablabla. However, a disadvantage of such database is the imbalanced workload assigned to each node server and thus the inefficiency of the whole system. In this paper, we examine how the different CPU and memory usage on a machine affect the query execution time.  Based on that, we try to assign jobs to different node servers according to their conditions. From our experiment, 
+Distributed data management is of great importance theoretically and is also widely used in practice, especially for applications dealing with large amounts of data on the Internet. A problem with such databases is that workload assignments do not typically consider machine conditions, which reduces the efficiency of the system. In this paper, we propose a method which assigns queries to servers in a distributed database according to the servers' usage conditions. Our proposed method helps to improve the database efficiency when there is a significant workload imbalance, however, the stock method is better for most cases. We also examine how the resource usage information affects the query execution time. We also encountered limitations implementing our methods in Cassandra and though our results themselves may not be useful, knowledge of these limitations will contribute to the foundation for future resource based query assignment research.
 \end{abstract}
 
 \input{cs848_introRelWork}

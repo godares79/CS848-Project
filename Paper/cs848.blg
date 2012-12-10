@@ -1,4 +1,6 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: cs848.aux
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: cs848.aux
 The style file: abbrv.bst
 Database file #1: refs.bib
 I was expecting a `,' or a `}'---line 316 of file refs.bib
@@ -14,8 +16,6 @@ Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Ev
 while executing---line 1049 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1049 of file abbrv.bst
-Warning--to sort, need author, organization, or key in IBM-IO
-Warning--empty title in IBM-IO
 Warning--empty booktitle in DataStaxCassandra
 Warning--empty journal in murphyVMWare
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
@@ -25,4 +25,45 @@ while executing---line 1090 of file abbrv.bst
 Too many commas in name 1 of "Wu, Eugene; Madden, Samuel; Zhang, Yang; Jones, Evan; Curino, Carlo" for entry MIT-Relational
 while executing---line 1090 of file abbrv.bst
 Warning--empty school in Zilio:1998:PDD:928651
+You've used 29 entries,
+            2118 wiz_defined-function locations,
+            688 strings with 10539 characters,
+and the built_in function-call counts, 11718 in all, are:
+= -- 1155
+> -- 652
+< -- 12
++ -- 262
+- -- 230
+* -- 865
+:= -- 1897
+add.period$ -- 94
+call.type$ -- 29
+change.case$ -- 197
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 427
+empty$ -- 826
+format.name$ -- 230
+if$ -- 2477
+int.to.chr$ -- 0
+int.to.str$ -- 29
+missing$ -- 20
+newline$ -- 146
+num.names$ -- 56
+pop$ -- 216
+preamble$ -- 1
+purify$ -- 173
+quote$ -- 0
+skip$ -- 328
+stack$ -- 0
+substring$ -- 641
+swap$ -- 132
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 116
+warning$ -- 3
+while$ -- 99
+width$ -- 31
+write$ -- 330
 (There were 7 error messages)
