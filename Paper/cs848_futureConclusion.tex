@@ -1,4 +1,6 @@
 \section{Discussion}
+\label{sec:discussion}
+
 As can be seen, our approach only provides a noticeable improvement to the performance of Cassandra when multiple nodes in the cluster are heavily loaded. This is not what we initially imagined our results would be. One of our intuitions is that the performance decrease exists because the resource usage formula does not accurately reflect what the time to execute a query will be. To confirm this intuition we performed an experiment that compared the resource usage to the query execution time in a Cassandra instance.
 
 In the remainder of this section we will provide what we feel will be a more accurate resource usage formula for distributed databases, as well as discuss several limitations that may also have affected our work.
@@ -66,4 +68,6 @@ Network congestion occurs when a link is carrying so much data that is greater t
 \subsection{Future Work}
 
 \section{Conclusion}
+\label{sec:conclusion}
+
 Because the code that handles scans is completely disjoint from the code that handles reads, writes or updates it is plausible to implement our algorithm purely for scans while losing very little performance (just the overhead of a single thread in Cassandra that queries the CJD for resource information).
